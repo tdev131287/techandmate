@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load" loadImage="OnLoadImage"> 
+  <ribbon>
+    <tabs>
+      <tab id="myTab" label="The Smart Cube" insertBeforeMso="TabHome">
+        <group id="grp_TEssential" label="Template Essentials">
+            <button id="customButton11" label="Load Theme" keytip="L" getImage="setImage" size="large" onAction="TSCP_Callback11" supertip="Load TSC 2018 Theme in active presentation."/>
+			      <button id="customButton12" label="Start New PPT" keytip="N" imageMso="CreateReportFromWizard" size="large" onAction="TSCP_Callback12" supertip="Start a new presentation with TSC 2018 Theme."/>
+            <menu id="menu11" label="Add Slides" imageMso="ViewsReportView" keytip="M" size="large" itemSize="large" supertip="Insert TSC formatted slides in active presentation.">
+				          <button id="customButton13" label="Title Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC Title Slide format at the beginning of active presentation." />
+				          <button id="customButton14" label="Content Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC content page format after active slide."/>
+				          <button id="customButton15" label="Section Heading" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC section heading format after active slide."/>
+				          <button id="customButton16" label="Framework Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC framework slide format after active slide."/>
+				          <button id="customButton17" label="Blank Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC blank slide format after active slide."/>
+				          <button id="customButton18" label="End Page" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC end page at the end of active presentation."/>
+			   </menu>
+        </group>
+        
+        <group id="grp_SComponent" label="Slide Component">
+          <menu id="menu21" label="  Insert  " imageMso="Paste" keytip="R" size="large"  itemSize="large" supertip="Insert slide components on active slide." >
+ 				    <button id="customButton21" label="Road Map" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert road map on active slide."/>
+  				  <button id="customButton22" label="Slide Title" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert title box on active slide." />
+  				  <button id="customButton23" label="Text Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert text box on active slide." />
+  				  <button id="customButton24" label="Note Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert note box on active slide."/>
+ 				    <button id="customButton25" label="Source Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert source box on active slide."/>
+ 				    <button id="customButton26" label="Chart Title" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert chart title on active slide."/>
+ 				    <button id="customButton27" label="Quote Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert quote box on active slide."/>
+ 			  </menu>			
+
+			    <menu id="menu32" label="  Format  " imageMso="Copy" keytip="S" size="large" itemSize="large" supertip="Format slide components on active slide.">
+ 				    <button id="customButton31" label="as Road Map" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as road map on active slide."/>
+  				  <button id="customButton32" label="as Slide Title" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as title box on active slide."/>
+  				  <button id="customButton33" label="as Text Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as text box on active slide." />
+  				  <button id="customButton34" label="as Note Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as note box on active slide."/>
+ 				    <button id="customButton35" label="as Source Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as source box on active slide."/>
+ 				    <button id="customButton36" label="as Chart Title" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as chart title on active slide."/>
+ 				    <button id="customButton37" label="as Quote Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as chart title on active slide."/>
+  			   </menu>
+        </group>
+
+        <group id="grp_CFunction" label="ChartFunction">
+          <menu id="menu41" label=" Insert Chart " imageMso="SlideMasterChartPlaceholderInsert" keytip="I" size="large" itemSize="large" supertip="Insert TSC standard charts on active slide.">
+				    <button id="customButton41" label="Clustered Column" getImage="setImage" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard clustered column chart on active slide."/>
+				    <button id="customButton42" label="Stacked Column" getImage="setImage" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard slacked column chart on active slide."/>
+				    <!--<button id="customButton43" label="Line Chart" imageMso="ChartAreaChart" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard line chart on active slide." visible="false"/>-->
+				    <button id="customButton44" label="Pie Chart" getImage="setImage" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard pie chart on active slide."/>
+				    <!--<button id="customButton45" label="Doughnut Chart" imageMso="ChartTypeOtherInsertGallery" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard doughnut chart on active slide." visible="false"/>-->
+			    </menu> 	
+						<button id="customButton46" label=" Format Chart" imageMso="ChartStylesGallery" keytip="F" size="large" onAction="TSCP_Callback46" screentip="Format Chart" supertip="Format selected chart with TSC formatting guidelines." />
+          <dropDown id="dropDown4D1" showLabel="true" label="Color Scheme" getSelectedItemID="GetSelectedItem4D1" onAction="TSCP_Callback4D1" sizeString="WWWWW">
+  					<item id="item1" label="Scheme 1" />
+  					<item id="item2" label="Scheme 2" />
+  					<item id="item3" label="Scheme 3" />
+            <item id="item4" label="Scheme 4" />
+				  </dropDown>
+
+          <dropDown id="dropDown4D2" showLabel="true" label=" Data Labels" getSelectedItemID="GetSelectedItem4D2" onAction="TSCP_Callback4D2" sizeString="WWWWW">
+            <item id="item6" label="Show" />
+            <item id="item7" label="Hide" />
+          </dropDown>
+
+				  <dropDown id="dropDown4D3" showLabel="true" label="  Y-Axis    " getSelectedItemID="GetSelectedItem4D3" onAction="TSCP_Callback4D3" sizeString="WWWWW" >
+  					<item id="item8" label="Show" />
+  					<item id="item9" label="Hide" />
+ 				  </dropDown>
+        </group>
+
+        <group id="grp_Calc" label="Caluclation">
+          <button id="customButton51" label="Growth Rates" keytip="G" imageMso="ChartGridlines" size="large" onAction="TSCP_Callback51" supertip="Calculate CAGR of various series of selected chart."/>
+				  <button id="customButton52" label="Sum of  Pie Chart " keytip="J" imageMso="AutoSum" size="large" onAction="TSCP_Callback52" supertip="Calculate Sum of series of selected Pie chart."/>
+        </group>
+
+        <group id="grp_Review" label="Review">
+            <button id="customButton61" label="Format Review" keytip="D" imageMso="AdpDiagramTableModesMenu" size="large"  onAction="TSCP_Callback61" supertip="Reviews formatting errors in selected slides." />
+  				  <button id="customButton62" label="Editorial Review" keytip="E" imageMso="FileViewDigitalSignatures" size="large"  onAction="TSCP_Callback62" supertip="Reviews Editorial errors in selected slides."/>
+        </group>
+
+        <!--<group id="grp_Tools" label="Tools">
+            <button id="customButton71" label="Change Language" imageMso="ViewWebLayoutView" keytip="A" size="large" onAction="TSCP_Callback71" supertip="Change language in all objects in all slides of active presentation."/>
+				    <button id="customButton72" label="Collate Source" imageMso="FileExcelServicesOptions" keytip="B" size="large" onAction="TSCP_Callback72" supertip="Aggregate sources from all slides in a seperate slide."/>
+				    <button id="customButton73" label="Insert Infographics" imageMso="ClipArtInsert" keytip="I1" size="large" onAction="TSCP_Callback73" supertip="Insert Infographics from TSC Library."/>
+				    <button id="customButton73A" label="Insert Icons" imageMso="SlideMasterClipArtPlaceholderInsert" keytip="I1" size="large" onAction="TSCP_Callback73A" supertip="Insert Icons from TSC Library."/>
+				    <button id="customButton73B" label="Insert Images" imageMso="ControlLogo" keytip="I2" size="large" onAction="TSCP_Callback73B" supertip="Insert Images from TSC Library."/>
+				    <button id="customButton74" label="Insert Symbol" imageMso="FontSchemes" keytip="T" size="normal" onAction="TSCP_Callback74" supertip="Insert commonly used symbol at current curson position of active slide."/>
+				    <button id="customButton75" label="Save Slides" imageMso="SaveAndNew" keytip="U" size="normal" onAction="TSCP_Callback75" supertip="Save selected slides of active presentation at the user specified location."/>
+				    <button id="customButton76" label="Send Slides" imageMso="SaveAttachments" keytip="V" size="normal" onAction="TSCP_Callback76" supertip="Send selected slides of active presentaiton using outlook application."/>
+        </group>-->
+
+        <group id="grp_Help" label="Help">
+            <button id="customButton81" label="About" keytip="O" imageMso="TentativeAcceptInvitation" size="normal" onAction="TSCP_Callback81" supertip="Read version information or report an issue."/>
+				    <button id="customButton82" label="Help" keytip="H" imageMso="CategoryCollapse" size="normal" onAction="TSCP_Callback82" supertip="Open help document for TSC Addin."/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
