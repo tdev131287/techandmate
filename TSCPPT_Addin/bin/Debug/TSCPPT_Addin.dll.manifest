@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="TSCPPT_Addin.dll" version="1.0.0.0" publicKeyToken="150e3aec4bf06794" language="neutral" processorArchitecture="msil" type="win32" />
+  <description xmlns="urn:schemas-microsoft-com:asm.v1">TSCPPT_Addin</description>
+  <application />
+  <entryPoint>
+    <co.v1:customHostSpecified />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.CSharp" version="4.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="stdole" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.dll" size="16048">
+      <assemblyIdentity name="Microsoft.Office.Tools" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Vgvc0uYwZVUc7LUY2JZ9KAzZj7xIADwUKXmP0lBdgwU=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.Common.dll" size="92344">
+      <assemblyIdentity name="Microsoft.Office.Tools.Common" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>9ksp+/YUo4Q2xUje3aOMuS2A+gI7SsBRbCG78UDZKa4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.Common.v4.0.Utilities.dll" size="32664">
+      <assemblyIdentity name="Microsoft.Office.Tools.Common.v4.0.Utilities" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>jLCTF8Mm6bD4PDN+rnzN6q0+ReXaNgPh68kMWgatFwI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.v4.0.Framework.dll" size="28360">
+      <assemblyIdentity name="Microsoft.Office.Tools.v4.0.Framework" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ISZh8727tCrrTeM0j3FK7F6rylc8msZemTZgJIz8QMI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.Tools.Applications.Runtime.dll" size="83168">
+      <assemblyIdentity name="Microsoft.VisualStudio.Tools.Applications.Runtime" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>vDNwPlxZTsrepY5kiLFDjUnvE55xbfsf7N7uzyD0qzo=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TSCPPT_Addin.dll" size="232448">
+      <assemblyIdentity name="TSCPPT_Addin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>4+DIEk+LAWh/NqhhDxBki03f8wL8z+esqo+chsQzT3E=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="AppData\Image\Chart\99420977.jpg" size="1143195">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>z3+1nrcr2SMscl+WZxyRhPEG/2XdzIx8HbS+uodWyAE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Chart\GettyImages_164192618.jpg" size="6701167">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>UenggUIKulWvFMAKNe612/pMTFstib/77S4uYUwMQbg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Chart\GettyImages_173779270.jpg" size="3169691">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>548S98XpkDhrP3tS/bUYajJAT4sgEPP+u8Sv1cP06bg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Chart\ThinkstockPhotos-152031460.jpg" size="3050374">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>8uxGMSDiwsTLP0IGpmwuO4ub/3wbeCmKTvmEO2G6YlE=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Chart\ThinkstockPhotos-474466425.jpg" size="9810009">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>QTKZTfV26PNvvAtUYklVQfodvZwLGds3c5HRNTft0Q4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Chart\ThinkstockPhotos-475640519.jpg" size="2129036">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ZxvdsHzKAbvzzIt+QbiuIb9maYw7U20yOBdEh3bDYts=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Blank Slide.png" size="3558">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>sICMkARbx++qwrIinBOT5SQ0aZI2+dSWAOmhuOkhPOY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Chart Title.png" size="3456">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>jUZvDn17WHmdJF3CnJeOySTMNRqTZoF7HZD1BPxf71A=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Column chart.png" size="468">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ccJNwWKSw6dOQRP6I9jfYgiYa0GyZ781mfQkC0oSQuM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Content Slide.png" size="1413">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zZwtd+j1OB8CwmbYMVQbZWE4YuJ8kH4tz/DAC8wTmVQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Eng Page.png" size="2953">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>p0aI3iQZraac++Y4h3BLhVR1q+c0Vq31AoGGkEQCSbQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Framework Slide.png" size="4452">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>sFg3SGEwgAMnAMH4DIskdBKvSKULSakJEpR7CBW859s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\frmlogo.png" size="3456">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mIqiPJqylc1lwzc8+XE8r8/jeTkaKAHvAYYAA5Ksye8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\New Theme.png" size="3302">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>UpbIKvXx+SyPV7uC/VUIb/KTIRDP1RnAW/S6f6EP88E=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\New Theme1.png" size="4694">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>S0wlAqnFzw5Qx2USlzV65yzwZZ1lVt3sekCQSXN0vTk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Note Box.png" size="4314">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>18wdPLSsZ+CUpeLVHcWYO3RZ/2dSDUFRDlkpJEUx4YA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Pie chart.png" size="3106">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>ua1y9ygaMUKcYZnXbR0Sj16ere46L6yBGB0jzT219jM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Quote Box.png" size="882">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>DZDzCkhYxeYluZgaaw7tN9tO6UAr/LZ4AH5D094VWgI=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Section Heading.png" size="1308">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>h7wBltUwi7mZ/k1OFaRusQ5JPuAjzZ8roXKRrU5B2GU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Slide Title.png" size="354">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>wMebDuuRtxvYtHtwSw3wIQCrjWAnnRiEt94723mfP50=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Source Box.png" size="3316">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>c77HiBZYenWrMGcYw5qNsBWLRgtLBZKrW4W5W/mcZ8M=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Stacked Chart.png" size="636">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>wjzcYjSmgJa63yElPlS8M+XuDc3mfiTgkxityuWI+dM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Text Box.png" size="318">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>JHGS6Sv28JNFk7G4sGhfRG5qgJvrUCqq2FupB7rs0X0=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Image\Icon\Title  Slide.png" size="3871">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>6kWrJTH4/GqV4tWwrZTKalG9YcKzt21sctLj+Ne4urU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="AppData\Mapping\support.txt" size="0">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="TSCPPT_Addin.dll.config" size="77">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>sRXPO8NcIiuVI4ajMrs7gnxty0j6ChK7OorE6bM0xfQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <vstav3:addIn xmlns:vstav3="urn:schemas-microsoft-com:vsta.v3">
+    <vstav3:entryPointsCollection>
+      <vstav3:entryPoints>
+        <vstav3:entryPoint class="TSCPPT_Addin.ThisAddIn">
+          <assemblyIdentity name="TSCPPT_Addin" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+        </vstav3:entryPoint>
+      </vstav3:entryPoints>
+    </vstav3:entryPointsCollection>
+    <vstav3:update enabled="true">
+      <vstav3:expiration maximumAge="7" unit="days" />
+    </vstav3:update>
+    <vstav3:application>
+      <vstov4:customizations xmlns:vstov4="urn:schemas-microsoft-com:vsto.v4">
+        <vstov4:customization>
+          <vstov4:appAddIn application="PowerPoint" loadBehavior="3" keyName="TSCPPT_Addin">
+            <vstov4:friendlyName>TSCPPT_Addin</vstov4:friendlyName>
+            <vstov4:description>TSCPPT_Addin</vstov4:description>
+            <vstov4.1:ribbonTypes xmlns:vstov4.1="urn:schemas-microsoft-com:vsto.v4.1" />
+          </vstov4:appAddIn>
+        </vstov4:customization>
+      </vstov4:customizations>
+    </vstav3:application>
+  </vstav3:addIn>
+<publisherIdentity name="CN=THESMARTCUBE\Devendra.Tripathi" issuerKeyHash="e69e74faed96d21a09444b63ad3fe98ee0cfb30b" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>xaeeqtMrr70stTIbyyJUVYjaS1oxKyPgiYAJnd8wxqk=</DigestValue></Reference></SignedInfo><SignatureValue>yofJA9DbC8w4zNBNLKLw7D3m21viivPt84727Bou0P5z017+UVMGdUoxJPncSNjc4secgzC24Ywqj9aV6X5uiR43U6DQ8m4n0a540POnNlLcd95PyW/7qn5AMrvM/kvnF4J9/ZBBFWGJ4lzs7o2YNwLYtnRjSmjRapXQsGW1Uio=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>zrUilc2qa2uUN/6UgZmnHCeFwPXXCne2Coj6prdd8C/CPc0PhY44GZVKTKLy6KueTlxyi/dIut+wuXidaH+SsPpZ6TisFtqy1F5FABiaz6Ls0t3kcm8KewNYIbmzCk3SLlQRpeW8ijir+3Xh6f4bLght7PG0uSKJ3cdnT1UbqNE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="a9c630df9d098089e0232b315a4bda88555422cb1b32b52cbdaf2bd3aa9ea7c5" Description="" Url=""><as:assemblyIdentity name="TSCPPT_Addin.dll" version="1.0.0.0" publicKeyToken="150e3aec4bf06794" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=THESMARTCUBE\Devendra.Tripathi</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>RnfXM5x8S6jFquhlZhoF8eWy/0syEmYVoNQZSP259n4=</DigestValue></Reference></SignedInfo><SignatureValue>s9AqzYxzmLfHUFxn8QwmYk33413BlWfD/NVEv2WQxyakOJKbuPxtZz5+psYgpOLPHt2ncCIw8X2O2QqBWBogx4r8Zt/O5atBqrd1dbHbIMFH46HVhY/c5YEmZA8bXmEapyxrUJpx+XxikX1HwGEtIW9PlhXZHWXV8aRvHOXEUyI=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>zrUilc2qa2uUN/6UgZmnHCeFwPXXCne2Coj6prdd8C/CPc0PhY44GZVKTKLy6KueTlxyi/dIut+wuXidaH+SsPpZ6TisFtqy1F5FABiaz6Ls0t3kcm8KewNYIbmzCk3SLlQRpeW8ijir+3Xh6f4bLght7PG0uSKJ3cdnT1UbqNE=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIICETCCAXqgAwIBAgIQWVEkgtFnorVNOzseDjTm0DANBgkqhkiG9w0BAQsFADBHMUUwQwYDVQQDHjwAVABIAEUAUwBNAEEAUgBUAEMAVQBCAEUAXABEAGUAdgBlAG4AZAByAGEALgBUAHIAaQBwAGEAdABoAGkwHhcNMTgwMTExMDM1NDU0WhcNMTkwMTExMDk1NDU0WjBHMUUwQwYDVQQDHjwAVABIAEUAUwBNAEEAUgBUAEMAVQBCAEUAXABEAGUAdgBlAG4AZAByAGEALgBUAHIAaQBwAGEAdABoAGkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAM61IpXNqmtrlDf+lIGZpxwnhcD11wp3tgqI+qa3XfAvwj3ND4WOOBmVSkyi8uirnk5ccov3SLrfsLl4nWh/krD6Wek4rBbastReRQAYms+i7NLd5HJvCnsDWCG5swpN0i5UEaXlvIo4q/t14en+Gy4IbezxtLkiid3HZ09VG6jRAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAQxtKaTs4fMAkfFKsjX8lPlUsGhLqvmm50KzAIaMOHJ+hucXv277aWPHPgIJ4YZqf59ugYPK2MbZ4hV3J1T46/hROE9ha0t/WmSJJ2D8hmaKgPx/DfxDN3+OAZ0kKhdFCMvSmY7cSvEsXJv0Mpj5NFogy7hiZYE6Qtov4s3eb65I=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
