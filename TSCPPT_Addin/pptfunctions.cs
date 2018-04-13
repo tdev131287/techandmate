@@ -18,7 +18,7 @@ namespace TSCPPT_Addin
     class pptfunctions
     {
         PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
-        PowerPoint.Presentation thisPPT = Globals.ThisAddIn.Application.ActivePresentation;
+        PowerPoint.Presentation ActivePPT = Globals.ThisAddIn.Application.ActivePresentation;
         Shapecheck PPTshpchk = new Shapecheck();
         Formatshapes PPTshpFormat = new Formatshapes();
         string msgTitle = "The Smart Cube";
@@ -48,7 +48,6 @@ namespace TSCPPT_Addin
         public void ApplyPPT_Theme(Office.IRibbonControl rib)
         {
             //String path;
-            PowerPoint.Presentation actPPT=null;
             PowerPoint.Presentation thisPPT = Globals.ThisAddIn.Application.ActivePresentation;
             PPTActions PPTAction = new PPTActions();
             PowerPoint.Application oApp = Marshal.GetActiveObject("PowerPoint.Application") as PowerPoint.Application;
@@ -75,11 +74,11 @@ namespace TSCPPT_Addin
             string design_name;
             try
             {
-                int num_design = thisPPT.Designs.Count;
+                int num_design = ActivePPT.Designs.Count;
                 for (int i = 1; i <= num_design; i++)
                 {
-                    design_name = thisPPT.Designs[i].Name;
-                    thisPPT.Designs[design_name].Name = design_name + "_xOldX";
+                    design_name = ActivePPT.Designs[i].Name;
+                    ActivePPT.Designs[design_name].Name = design_name + "_xOldX";
                 }
             }
             catch(Exception err)
@@ -94,15 +93,15 @@ namespace TSCPPT_Addin
             string design_name=null;
             try
             {
-                int num_design = thisPPT.Designs.Count;
+                int num_design = ActivePPT.Designs.Count;
 
                 for (int i = 1; i <= num_design; i++)
                 {
-                    design_name = thisPPT.Designs[i].Name;
+                    design_name = ActivePPT.Designs[i].Name;
                     //IndexOf("_xoldX", 0) > 0)
                     if (design_name != tsc_designName && design_name.Contains("_xOldX") == true)
                     {
-                        thisPPT.Designs[i].Delete();
+                        ActivePPT.Designs[i].Delete();
 
                     }
                 }
@@ -178,16 +177,16 @@ namespace TSCPPT_Addin
             try
             {
                 SlideIndex = pptObj.get_LastSelectedSlide();
-
+                if (SlideIndex == 0) { MessageBox.Show("Please select a slide before proceed.", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);return; }
                 if (rib.Id != "customButton13" || rib.Id != "customButton18")
                 {
-                    if (selectedSlides == 0) { MessageBox.Show("Please select a slide and try again.", PPTAttribute.msgTitle,MessageBoxButtons.OK,MessageBoxIcon.Warning); }//|| thisPPT.Slides.Count > 0)
-                    else if (thisPPT.Slides.Count == 0) { SlideIndex = 0; }
+                    if (selectedSlides == 0) { MessageBox.Show("Please select a slide before proceed.", PPTAttribute.msgTitle,MessageBoxButtons.OK,MessageBoxIcon.Warning); }//|| thisPPT.Slides.Count > 0)
+                    else if (ActivePPT.Slides.Count == 0) { SlideIndex = 0; }
                 }
 
                 if (rib.Id == "customButton13")
                 {
-                    foreach (PowerPoint.Slide tslide in thisPPT.Slides)
+                    foreach (PowerPoint.Slide tslide in ActivePPT.Slides)
                     {
                         sName = tslide.Name;
                         if (sName.Length >= 11) { coverName = sName.Substring(0, 11); }
@@ -236,7 +235,7 @@ namespace TSCPPT_Addin
                 }
                 else if (rib.Id == "customButton18")
                 {
-                    foreach (PowerPoint.Slide tslide in thisPPT.Slides)
+                    foreach (PowerPoint.Slide tslide in ActivePPT.Slides)
                     {
                         sName = tslide.Name;
                         try { if (tslide.CustomLayout.Name == "End Page" || sName.Substring(0, 9) == "End Page") { cnt++; } }
@@ -252,7 +251,7 @@ namespace TSCPPT_Addin
                     {
                         DataTable dtSlideIndex = pptObj.get_SlideIndex("End Page");
                         cpySlide = Convert.ToInt32(dtSlideIndex.Rows[0]["SlideIndex"]);
-                        pptObj.insert_Slide_in_ActivePPT(cpySlide, (thisPPT.Slides.Count + 1), "ESlide", cnt);
+                        pptObj.insert_Slide_in_ActivePPT(cpySlide, (ActivePPT.Slides.Count + 1), "ESlide", cnt);
                     }
                 }
             }
@@ -660,8 +659,8 @@ namespace TSCPPT_Addin
                 for (int selCht = 0; selCht < numSelCht; selCht++)
                 {
                     shp_nam = SelectedCharts[selCht];                       // Get the shape name from selected chart item
-                    PowerPoint.Shape myShape = thisPPT.Slides[sld_num].Shapes[shp_nam];
-                    PowerPoint.Chart myChart = thisPPT.Slides[sld_num].Shapes[shp_nam].Chart;
+                    PowerPoint.Shape myShape = ActivePPT.Slides[sld_num].Shapes[shp_nam];
+                    PowerPoint.Chart myChart = ActivePPT.Slides[sld_num].Shapes[shp_nam].Chart;
                     string chType = shpObj.chartType(myChart);
                     bool ch3D = shpObj.chart3D(myChart);
                     //- ---------------------   G E T   C O L O R   C O D E --------------------------------------------------------
@@ -672,7 +671,7 @@ namespace TSCPPT_Addin
                     else if (tscColors == "Scheme3") { DTcolorCode = dbObj.get_ChatColorCode("Scheme3", seriesCount); }
                     else if (tscColors == "Scheme4") { DTcolorCode = dbObj.get_ChatColorCode("Scheme4", seriesCount); }
                     // ----------------------------------------------------- Call the function to Format a Chart -------------------
-                    chartObj.Format_Series(myChart, hasYAxis, chType);
+                    
                     chartObj.Format_ChartArea(myChart);
                     chartObj.Format_Title(myChart);
                     chartObj.Format_YAxis1(myChart, hasYAxis, chType);
@@ -683,7 +682,8 @@ namespace TSCPPT_Addin
                     chartObj.Format_XSeries(myChart, true);
                     //chartObj.Format_Legend(myChart, true);
                     chartObj.Format_PlotArea(myChart, chType);
-                    
+                    //chartObj.Format_Series(myChart, hasYAxis, chType);
+
                     // -----------------------------------------------------------------------------------------------------------------
                     PowerPoint.SeriesCollection sc = myChart.SeriesCollection();
                     for (int i = 1; i <= sc.Count; i++)
@@ -808,6 +808,8 @@ namespace TSCPPT_Addin
                             myChart.SeriesCollection(i).HasDataLabels = false;
                         }
                     }
+                    chartObj.Format_Series(myChart, hasYAxis, chType);  // format column chart line
+
                 } // Close main for
             }
             catch(Exception err)
@@ -816,5 +818,113 @@ namespace TSCPPT_Addin
                 PPTAttribute.ErrorLog(errtext, rib.Id);
             } 
         }// Close the method
+
+        public void formatbullettxt(Office.IRibbonControl rib)
+        {
+
+            //PowerPoint.TextRange mytxtRng = ppApp.ActiveWindow.Selection.ShapeRange[1].TextFrame.TextRange;
+            try
+            {
+                PPTActions actionObj = new PPTActions();
+                string shpname=null;
+                int sldNum = ppApp.ActiveWindow.Selection.SlideRange.SlideNumber;
+                PowerPoint.Shape selShape = ppApp.ActiveWindow.Selection.ShapeRange[1];
+                if (selShape.Type != MsoShapeType.msoGroup)
+                {
+                    if (selShape.Type != MsoShapeType.msoTable)
+                    {
+                        if (ppApp.ActiveWindow.Selection.Type == PowerPoint.PpSelectionType.ppSelectionText)
+                        {
+                            PowerPoint.TextRange txtRng = ppApp.ActiveWindow.Selection.TextRange;
+                            int SelectedParagraphs = txtRng.Characters(txtRng.Start, txtRng.Length).Paragraphs().Count;
+                            if (SelectedParagraphs < 2)
+                            {
+                                shpname = ppApp.ActiveWindow.Selection.ShapeRange.Name;
+                                int CurrentCursorPositionInCharacters = ppApp.ActiveWindow.Selection.TextRange.Start;
+                                PowerPoint.TextFrame txtFrame = ppApp.ActiveWindow.Selection.ShapeRange.TextFrame;
+                                int pnum = txtFrame.TextRange.Characters(-1, CurrentCursorPositionInCharacters).Paragraphs().Count;
+                                PowerPoint.ParagraphFormat prgformat = txtRng.Paragraphs(pnum).ParagraphFormat;
+                                prgformat.SpaceBefore = 6;
+                                prgformat.SpaceAfter = 0;
+                                prgformat.SpaceWithin = (float)0.9;
+
+                                if (rib.Id == "btnbullet1")
+
+                                {
+                                    //-Ruler.Levels[1].FirstMargin
+                                    char myCharacter = (char)132;
+
+                                    txtRng.Paragraphs(pnum).IndentLevel = 1;
+                                    //txtRng.Paragraphs(pnum).ParagraphFormat
+                                    ppApp.ActiveWindow.Selection.ShapeRange.TextFrame.Ruler.Levels[pnum].FirstMargin = (float)0.64;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.SpaceBefore = (float)0.64;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Character = myCharacter;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Color.RGB = System.Drawing.Color.FromArgb(78, 204, 124).ToArgb();
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Size = (float)10.84;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Name = "Wingdings 3";
+                                    txtRng.Paragraphs(pnum).Font.Color.RGB = System.Drawing.Color.FromArgb(57, 42, 30).ToArgb();
+                                    txtRng.Paragraphs(pnum).Font.Size = 12;
+                                    txtRng.Paragraphs(pnum).Font.Name = "Corbel";
+                                    float yy = txtRng.Parent.Ruler.Levels(1).LeftMargin;
+
+                                }
+                                else if (rib.Id == "btnbullet2")
+                                {
+                                    txtRng.Paragraphs(pnum).IndentLevel = 2;
+                                    ppApp.ActiveWindow.Selection.ShapeRange.TextFrame.Ruler.Levels[pnum].FirstMargin = (float)18;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.SpaceBefore = (float)1.11;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Character = 167;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Color.RGB = System.Drawing.Color.FromArgb(78, 204, 124).ToArgb();
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Size = (float)11;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Name = "Wingdings";
+                                    txtRng.Paragraphs(pnum).Font.Color.RGB = System.Drawing.Color.FromArgb(57, 42, 30).ToArgb();
+                                    txtRng.Paragraphs(pnum).Font.Size = 11;
+                                    txtRng.Paragraphs(pnum).Font.Name = "Corbel";
+
+                                }
+                                else if (rib.Id == "btnbullet3")
+                                {
+                                    char myCharacter = (char)172;
+                                    
+                                    txtRng.Paragraphs(pnum).IndentLevel = 3;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Character = myCharacter;
+                                    ppApp.ActiveWindow.Selection.ShapeRange.TextFrame.Ruler.Levels[pnum].FirstMargin = (float)31.5;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.SpaceBefore = (float)2.06;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Color.RGB = System.Drawing.Color.FromArgb(78, 204, 124).ToArgb();
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Size = (float)11;
+                                    txtRng.Paragraphs(pnum).ParagraphFormat.Bullet.Font.Name = "Wingdings 3";
+                                    txtRng.Paragraphs(pnum).Font.Color.RGB = System.Drawing.Color.FromArgb(57, 42, 30).ToArgb();
+                                    txtRng.Paragraphs(pnum).Font.Size = 11;
+                                    txtRng.Paragraphs(pnum).Font.Name = "Arial";
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bullet formating can not allow in table", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Please ungroup a selected items", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch(Exception err)
+            {
+                string errtext = err.Message;
+                PPTAttribute.ErrorLog(errtext, rib.Id);
+            }
+        }
+
+        public void Inserttable()
+        {
+
+            
+
+        }
     }
+    
 }

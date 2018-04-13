@@ -16,62 +16,75 @@ namespace TSCPPT_Addin
         {
 
             System.Text.StringBuilder specification = new System.Text.StringBuilder();
-            foreach (PowerPoint.Shape shp in ppApp.ActiveWindow.Selection.ShapeRange)
+            PowerPoint.Shape selShape = ppApp.ActiveWindow.Selection.ShapeRange[1];
+
+
+            MsoShapeType shpType = selShape.Type;
+            if (selShape.Type == MsoShapeType.msoTable)
             {
+                float borderWidth = selShape.Table.Rows[1].Cells[1].Borders[PowerPoint.PpBorderType.ppBorderRight].Weight;
 
-                MsoTriState vstatus = shp.Line.Visible;                 //LineVisible
-                MsoTriState fillStatus = shp.Fill.Visible;              //FillVisible
-                //str fillColor = shp.Fill.ForeColor.RGB;               //FillColor-----------------------Not
-                float fillTrasn = shp.Fill.Transparency;                //FillTransparency
-                MsoTriState sVisible = shp.Shadow.Visible;              //ShadowVisible
-                float sleft = shp.Left;                                 //ShapeLeft
-                float stop = shp.Top;                                   //ShapeTop
-                float swidth = shp.Width;                               //ShapeWidth
-                float shpHeight = shp.Height;                           //ShapeHeight
-                float rot = shp.Rotation;                                 //Rotaion
-                MsoTriState lrvalue = shp.LockAspectRatio;              //LockAspectRatio
-                MsoTextOrientation txtOrientation = shp.TextFrame.Orientation;      //Orientation
-                MsoVerticalAnchor txtAnchor = shp.TextFrame.VerticalAnchor;         //VerticalAnchor
-                PowerPoint.PpAutoSize autosize = shp.TextFrame.AutoSize;            //AutoSize
-                float mgleft = shp.TextFrame.MarginLeft;                            //MarginLeft
-                float mgRight = shp.TextFrame.MarginLeft;                   //MarginRight
-                float mgtop = shp.TextFrame.MarginTop;                      //MarginTop
-                float mgbottom = shp.TextFrame.MarginBottom;                      //MarginBottom
-                MsoTriState wWrap = shp.TextFrame.WordWrap;                     //WordWrap
-                string dtext = shp.TextFrame.TextRange.Text;                    //DefaultText
-                string fname = shp.TextFrame.TextRange.Font.Name;               //FontName
-                MsoTriState txbold = shp.TextFrame.TextRange.Font.Bold;         //Bold
-                MsoTriState txItalics = shp.TextFrame.TextRange.Font.Italic;        //Italics
-                MsoTriState txUnderline = shp.TextFrame.TextRange.Font.Underline;        //Underline
-                float txsize = shp.TextFrame.TextRange.Font.Size;                       //FontSize
-                                                                                        //FontColor                                                                      
-                PowerPoint.ShadowFormat shadow = shp.Shadow;                     //Shadow
-                //PowerPoint.PpChangeCase txcase = shp.TextFrame.TextRange.ChangeCase;                //Case
-                PowerPoint.BulletFormat txbuttlet = shp.TextFrame.TextRange.ParagraphFormat.Bullet;           //ParagraphBullet
-                PowerPoint.PpParagraphAlignment txtAlig = shp.TextFrame.TextRange.ParagraphFormat.Alignment;            //ParagraphAlignment
-                MsoTriState hPun = shp.TextFrame.TextRange.ParagraphFormat.HangingPunctuation;                       //ParagraphHangingPunctuation
-                float psb = shp.TextFrame.TextRange.ParagraphFormat.SpaceBefore;                                    //ParagraphSpaceBefore
-                float psa = shp.TextFrame.TextRange.ParagraphFormat.SpaceAfter;                                    //ParagraphSpaceAfter
-                float psw = shp.TextFrame.TextRange.ParagraphFormat.SpaceWithin;                                    //ParagraphSpaceWithin
-                float rlfm = shp.TextFrame.Ruler.Levels[1].FirstMargin;                                    //RulerLevel1FirstMargin
-                float rllm = shp.TextFrame.Ruler.Levels[1].LeftMargin;                                    ////RulerLevel1LeftMargin
-                for (int i = 1; i <= shp.TextFrame.TextRange.Paragraphs().Count; i++)
+            }
+            else
+            {
+                foreach (PowerPoint.Shape shp in ppApp.ActiveWindow.Selection.ShapeRange)
                 {
-                    string paraStr = shp.TextFrame.TextRange.Paragraphs(i).Text;
-                    int indentVal = shp.TextFrame.TextRange.Paragraphs(i).IndentLevel;
+
+                    MsoTriState vstatus = shp.Line.Visible;                 //LineVisible
+                    MsoTriState fillStatus = shp.Fill.Visible;              //FillVisible
+                                                                            //str fillColor = shp.Fill.ForeColor.RGB;               //FillColor-----------------------Not
+                    float fillTrasn = shp.Fill.Transparency;                //FillTransparency
+                    MsoTriState sVisible = shp.Shadow.Visible;              //ShadowVisible
+                    float sleft = shp.Left;                                 //ShapeLeft
+                    float stop = shp.Top;                                   //ShapeTop
+                    float swidth = shp.Width;                               //ShapeWidth
+                    float shpHeight = shp.Height;                           //ShapeHeight
+                    float rot = shp.Rotation;                                 //Rotaion
+                    MsoTriState lrvalue = shp.LockAspectRatio;              //LockAspectRatio
+                    MsoTextOrientation txtOrientation = shp.TextFrame.Orientation;      //Orientation
+                    MsoVerticalAnchor txtAnchor = shp.TextFrame.VerticalAnchor;         //VerticalAnchor
+                    PowerPoint.PpAutoSize autosize = shp.TextFrame.AutoSize;            //AutoSize
+                    float mgleft = shp.TextFrame.MarginLeft;                            //MarginLeft
+                    float mgRight = shp.TextFrame.MarginLeft;                   //MarginRight
+                    float mgtop = shp.TextFrame.MarginTop;                      //MarginTop
+                    float mgbottom = shp.TextFrame.MarginBottom;                      //MarginBottom
+                    MsoTriState wWrap = shp.TextFrame.WordWrap;                     //WordWrap
+                    string dtext = shp.TextFrame.TextRange.Text;                    //DefaultText
+                    string fname = shp.TextFrame.TextRange.Font.Name;               //FontName
+                    MsoTriState txbold = shp.TextFrame.TextRange.Font.Bold;         //Bold
+                    MsoTriState txItalics = shp.TextFrame.TextRange.Font.Italic;        //Italics
+                    MsoTriState txUnderline = shp.TextFrame.TextRange.Font.Underline;        //Underline
+                    float txsize = shp.TextFrame.TextRange.Font.Size;                       //FontSize
+                                                                                            //FontColor                                                                      
+                    PowerPoint.ShadowFormat shadow = shp.Shadow;                     //Shadow
+                                                                                     //PowerPoint.PpChangeCase txcase = shp.TextFrame.TextRange.ChangeCase;                //Case
+                    PowerPoint.BulletFormat txbuttlet = shp.TextFrame.TextRange.ParagraphFormat.Bullet;           //ParagraphBullet
+                    PowerPoint.PpParagraphAlignment txtAlig = shp.TextFrame.TextRange.ParagraphFormat.Alignment;            //ParagraphAlignment
+                    MsoTriState hPun = shp.TextFrame.TextRange.ParagraphFormat.HangingPunctuation;                       //ParagraphHangingPunctuation
+                    float psb = shp.TextFrame.TextRange.ParagraphFormat.SpaceBefore;                                    //ParagraphSpaceBefore
+                    float psa = shp.TextFrame.TextRange.ParagraphFormat.SpaceAfter;                                    //ParagraphSpaceAfter
+                    float psw = shp.TextFrame.TextRange.ParagraphFormat.SpaceWithin;                                    //ParagraphSpaceWithin
+                    float rlfm = shp.TextFrame.Ruler.Levels[1].FirstMargin;                                    //RulerLevel1FirstMargin
+                    float rllm = shp.TextFrame.Ruler.Levels[1].LeftMargin;                                    ////RulerLevel1LeftMargin
+                    for (int i = 1; i <= shp.TextFrame.TextRange.Paragraphs().Count; i++)
+                    {
+                        string paraStr = shp.TextFrame.TextRange.Paragraphs(i).Text;
+                        int indentVal = shp.TextFrame.TextRange.Paragraphs(i).IndentLevel;
+                    }
+
+                    specification.Append("LineVisible :" + vstatus + Environment.NewLine + "FillVisible :" + fillStatus + Environment.NewLine + "FillTransparency :" + fillTrasn + Environment.NewLine);
+                    specification.Append("ShapeLeft :" + sleft + Environment.NewLine + "ShapeTop :" + stop + Environment.NewLine + "ShapeWeight :" + swidth + Environment.NewLine + "ShapeHeight :" + shpHeight + Environment.NewLine);
+
+
+                    specification.Append("Rotaion :" + rot + Environment.NewLine + "LockAspectRatio :" + lrvalue + Environment.NewLine + "Orientation :" + txtOrientation + Environment.NewLine + "VerticalAnchor :" + txtAnchor + Environment.NewLine);
+                    specification.Append("AutoSize :" + autosize + Environment.NewLine + "MarginLeft :" + mgleft + Environment.NewLine + "MarginRight :" + mgRight + Environment.NewLine + "MarginTop :" + mgtop + Environment.NewLine);
+                    specification.Append("MarginBottom :" + mgbottom + Environment.NewLine + "WordWrap :" + wWrap + Environment.NewLine + "DefaultText :" + dtext + Environment.NewLine + "FontName :" + fname + Environment.NewLine);
+                    specification.Append("Bold :" + txbold + Environment.NewLine + "Italics :" + txItalics + Environment.NewLine + "Underline :" + txUnderline + Environment.NewLine + "FontSize :" + txsize + Environment.NewLine);
+                    specification.Append("Shadow :" + shadow + Environment.NewLine + "ParagraphBullet :" + txbuttlet + Environment.NewLine + "ParagraphAlignment :" + txtAlig + Environment.NewLine + "ParagraphHangingPunctuation :" + hPun + Environment.NewLine);
+                    specification.Append("ParagraphSpaceBefore :" + psb + Environment.NewLine + "ParagraphSpaceAfter :" + psa + Environment.NewLine + "ParagraphSpaceWithin :" + psw + Environment.NewLine + "RulerLevel1FirstMargin :" + rlfm + Environment.NewLine);
+                    specification.Append("RulerLevel1LeftMargin :" + rllm);
+                    PPTAttribute.saveSpacification(specification, shp.Name);
                 }
-                specification.Append("LineVisible :" + vstatus + Environment.NewLine + "FillVisible :" + fillStatus + Environment.NewLine + "FillTransparency :" + fillTrasn + Environment.NewLine);
-                specification.Append("ShapeLeft :" + sleft + Environment.NewLine + "ShapeTop :" + stop + Environment.NewLine + "ShapeWeight :" + swidth + Environment.NewLine + "ShapeHeight :" + shpHeight + Environment.NewLine);
-
-
-                specification.Append("Rotaion :" + rot + Environment.NewLine + "LockAspectRatio :" + lrvalue + Environment.NewLine + "Orientation :" + txtOrientation + Environment.NewLine + "VerticalAnchor :" + txtAnchor + Environment.NewLine);
-                specification.Append("AutoSize :" + autosize + Environment.NewLine + "MarginLeft :" + mgleft + Environment.NewLine + "MarginRight :" + mgRight + Environment.NewLine + "MarginTop :" + mgtop + Environment.NewLine);
-                specification.Append("MarginBottom :" + mgbottom + Environment.NewLine + "WordWrap :" + wWrap + Environment.NewLine + "DefaultText :" + dtext + Environment.NewLine + "FontName :" + fname + Environment.NewLine);
-                specification.Append("Bold :" + txbold + Environment.NewLine + "Italics :" + txItalics + Environment.NewLine + "Underline :" + txUnderline + Environment.NewLine + "FontSize :" + txsize + Environment.NewLine);
-                specification.Append("Shadow :" + shadow + Environment.NewLine + "ParagraphBullet :" + txbuttlet + Environment.NewLine + "ParagraphAlignment :" + txtAlig + Environment.NewLine + "ParagraphHangingPunctuation :" + hPun + Environment.NewLine);
-                specification.Append("ParagraphSpaceBefore :" + psb + Environment.NewLine + "ParagraphSpaceAfter :" + psa + Environment.NewLine + "ParagraphSpaceWithin :" + psw + Environment.NewLine + "RulerLevel1FirstMargin :" + rlfm + Environment.NewLine);
-                specification.Append("RulerLevel1LeftMargin :" + rllm);
-                PPTAttribute.saveSpacification(specification, shp.Name);
             }
 
         }
@@ -220,15 +233,15 @@ namespace TSCPPT_Addin
                 bool secAxis = false;
                 PowerPoint.SeriesCollection sc = myChart.SeriesCollection();
                 if (chType == "Pie" || chType == "Doughnut" || chType == "Surface") { return; }
-                if (chType == "Radar" || chType == "Stock" || hasYAxis == true)
-                {
+                if (chType == "Radar" || chType == "Stock") { hasYAxis = true; }
+               
                     for (int i = 1; i <= sc.Count; i++)
                     {
                         if (myChart.SeriesCollection(i).AxisGroup == 2) { secAxis = true; break; }       //XlAxisGroup.xlSecondary
                     }
                     if (secAxis == true)
                     {
-                        if (myChart.HasAxis == true)
+                        if (hasYAxis == true)
                         {
                             myChart.HasAxis[XlAxisType.xlValue, PowerPoint.XlAxisGroup.xlSecondary] = true;
                             if (myChart.Axes(XlAxisType.xlValue, PowerPoint.XlAxisGroup.xlSecondary).HasTitle == true)
@@ -275,7 +288,7 @@ namespace TSCPPT_Addin
 
                     }
 
-                }
+             
 
             } // Close Main if Check the chart type
             catch (Exception err)
@@ -518,15 +531,15 @@ namespace TSCPPT_Addin
                 //bool secAxis = false;
                 PowerPoint.SeriesCollection sc = myChart.SeriesCollection();
                 if (chType == "Pie" || chType == "Doughnut" || chType == "Surface") { return; }
-                if (chType == "Radar" || chType == "Stock" || hasYAxis == true)
+                if (chType == "Column")
                 {
                     for (int i = 1; i <= sc.Count; i++)
                     {
                         PowerPoint.Series chartSeries = myChart.SeriesCollection(i);
-                        chartSeries.Border.Color= System.Drawing.Color.FromArgb(255, 255, 255).ToArgb();
+                        
                         myChart.SeriesCollection(i).Format.Line.Visible = MsoTriState.msoTrue;
                         myChart.SeriesCollection(i).Format.Line.ForeColor.RGB = System.Drawing.Color.FromArgb(255, 255, 255).ToArgb();
-                        myChart.SeriesCollection(i).MarkerBackgroundColor = System.Drawing.Color.FromArgb(255, 255, 255).ToArgb();
+                        chartSeries.Format.Line.Weight = (float)0.75;
                     }
 
                 }

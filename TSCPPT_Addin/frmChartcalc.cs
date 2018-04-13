@@ -88,7 +88,7 @@ namespace TSCPPT_Addin
                 this.Close();
                 string errtext = err.Message;
                 PPTAttribute.ErrorLog(errtext, "frmChartcalc_Load");
-                MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

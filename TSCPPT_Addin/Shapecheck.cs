@@ -309,22 +309,28 @@ namespace TSCPPT_Addin
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Size = (float)10.84;
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Name = "Wingdings 3";
                     txtRng.Paragraphs(index).Font.Color.RGB= System.Drawing.Color.FromArgb(57,42,30).ToArgb();
+                    txtRng.Paragraphs(index).Font.Size = 12;
+                    txtRng.Paragraphs(index).Font.Name = "Corbel";
                 }
                 else if (txtRng.Paragraphs(index).IndentLevel == 2)
                 {
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Character = 167;
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Color.RGB = System.Drawing.Color.FromArgb(78, 204, 124).ToArgb();
-                    txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Size = (float)12.04;
+                    txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Size = (float)11;
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Name = "Wingdings";
                     txtRng.Paragraphs(index).Font.Color.RGB = System.Drawing.Color.FromArgb(57, 42, 30).ToArgb();
+                    txtRng.Paragraphs(index).Font.Size = 11;
+                    txtRng.Paragraphs(index).Font.Name = "Corbel";
                 }
                 else if (txtRng.Paragraphs(index).IndentLevel == 3)
                 {
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Character = 2013;
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Color.RGB = System.Drawing.Color.FromArgb(78, 204, 124).ToArgb();
-                    txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Size = (float)12.04;
+                    txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Size = (float)11;
                     txtRng.Paragraphs(index).ParagraphFormat.Bullet.Font.Name = "Corbel";
                     txtRng.Paragraphs(index).Font.Color.RGB = System.Drawing.Color.FromArgb(57, 42, 30).ToArgb();
+                    txtRng.Paragraphs(index).Font.Size = 11;
+                    txtRng.Paragraphs(index).Font.Name = "Corbel";
                 }
 
 

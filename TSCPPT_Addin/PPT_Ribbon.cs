@@ -7,9 +7,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Office = Microsoft.Office.Core;
 using System.Windows.Forms;
-using PPT = Microsoft.Office.Interop.PowerPoint;
+using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools;
 using CustomTaskPanes = Microsoft.Office.Tools.CustomTaskPane;
+using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Drawing;
 
 // TODO:  Follow these steps to enable the Ribbon (XML) item:
@@ -38,6 +39,7 @@ namespace TSCPPT_Addin
     {
         private Office.IRibbonUI ribbon;
         string tscColors, cDataLabels, cYAxis;
+        
         public PPT_Ribbon()
         {
         }
@@ -59,6 +61,12 @@ namespace TSCPPT_Addin
             this.ribbon = ribbonUI;
             
         }
+        public Bitmap OnLoadImage(string imageName)
+        {
+            return new Bitmap(PPTAttribute.themeColor + imageName);
+        }
+
+
         public Bitmap setImage(Office.IRibbonControl rib)
         {
            switch(rib.Id)
@@ -87,8 +95,13 @@ namespace TSCPPT_Addin
                 case "customButton42": return new Bitmap(PPTAttribute.PiCon + "Stacked Chart.png");
                 case "customButton44": return new Bitmap(PPTAttribute.PiCon + "Pie chart.png");
                 case "customButton11": return new Bitmap(PPTAttribute.PiCon + "New Theme1.png");
+                case "btnbullet1": return new Bitmap(PPTAttribute.PiCon + "bullet1.png");
+                case "btnbullet2": return new Bitmap(PPTAttribute.PiCon + "bullet2.png");
+                case "btnbullet3": return new Bitmap(PPTAttribute.PiCon + "bullet3.png");
+                case "btnformatPPT": return new Bitmap(PPTAttribute.PiCon + "New Theme1.png");
+                case "galTest": return new Bitmap(PPTAttribute.PiCon + "New Theme1.png");
             }
-       
+            ribbon.Invalidate(); 
             return null;
         }
         #region TSC PPT Callbacks Define 
@@ -141,7 +154,7 @@ namespace TSCPPT_Addin
         //Growth Rates
         public void TSCP_Callback51(Office.IRibbonControl rib)
         {
-            PPT.Application ppApp = Globals.ThisAddIn.Application;
+            PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             pptfunctions funObj = new pptfunctions();
             Shapecheck shpObj = new Shapecheck();
             frmChartcalc chartObj = new frmChartcalc();
@@ -149,14 +162,14 @@ namespace TSCPPT_Addin
             Shapecheck PPTshpchk = new Shapecheck();
             List<string> SelectedCharts = new List<string>();
             SelectedCharts = PPTshpchk.FindSelectedCharts();
-            PPT.Presentation ActivePPT = Globals.ThisAddIn.Application.ActivePresentation;
+            PowerPoint.Presentation ActivePPT = Globals.ThisAddIn.Application.ActivePresentation;
             int numSelCht = SelectedCharts.Count;
             if (numSelCht == 0) {
                 MessageBox.Show("Please select a  chart for CAGR/AAGR calculation.", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             int sld_num = ppApp.ActiveWindow.Selection.SlideRange.SlideNumber;
-            PPT.Chart myChart = ActivePPT.Slides[sld_num].Shapes[SelectedCharts[0]].Chart;
+            PowerPoint.Chart myChart = ActivePPT.Slides[sld_num].Shapes[SelectedCharts[0]].Chart;
             string chType = shpObj.chartType(myChart);
             if (funObj.TSCThemeLoaded())
             {
@@ -223,7 +236,77 @@ namespace TSCPPT_Addin
             PPTAttribute.UserTracker(rib);
         }
 
+        public void btnbullet_Click(Office.IRibbonControl rib)
+        {
+            pptfunctions funObj = new pptfunctions();
 
+            if (funObj.TSCThemeLoaded()) { funObj.formatbullettxt(rib); }
+            else { MessageBox.Show("This functionality works with TSC Theme. Please Load TSC theme and try again. Thanks", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            PPTAttribute.UserTracker(rib);
+        }
+        public void btnformatPPT_Click(Office.IRibbonControl rib)
+        {
+            frmPPTFormat frmObj = new frmPPTFormat();
+            pptfunctions funObj = new pptfunctions();
+            frmObj.ShowDialog();
+            PPTAttribute.UserTracker(rib);
+
+        }
+        public void GalleryOnAction(Office.IRibbonControl rib, string galleryID, int selectedIndex)
+        {
+            PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
+            string bgrCode = null;
+            char Csplit = ',';
+            switch (galleryID)
+            {
+                case "itm11": { bgrCode = "102,114,0"; break; }
+                case "itm12": { bgrCode =  "133,142,51"; break; }
+                case "itm13": { bgrCode =  "163,170,102"; break; }
+                case "itm14": { bgrCode = "194,199,153"; break; }
+                case "itm15": { bgrCode =  "224,227,204"; break; }
+
+                case "itm21": { bgrCode =  "155,174,0"; break; }
+                case "itm22": { bgrCode = "175,190,91"; break; }
+                case "itm23": { bgrCode = "195,206,202,"; break; }
+                case "itm24": { bgrCode = "215,223,153"; break; }
+                case "itm25": { bgrCode = "235,239,204"; break; }
+
+                case "itm31": { bgrCode =  "97,85,75"; break; }
+                case "itm32": { bgrCode = "128,119,110"; break; }
+                case "itm33": { bgrCode =  "160,153,146"; break; }
+                case "itm34": { bgrCode =  "191,186,183"; break; }
+                case "itm35": { bgrCode =  "223,221,219"; break; }
+
+                case "itm41": { bgrCode =  "57,42,30"; break; }
+                case "itm42": { bgrCode =  "90,76,67"; break; }
+                case "itm43": { bgrCode =  "126,115,108"; break; }
+                case "itm44": { bgrCode =  "168,159,152"; break; }
+                case "itm45": { bgrCode = "210,205,202"; break; }
+
+                case "itm51": { bgrCode =  "193,184,162"; break; }
+                case "itm52": { bgrCode =  "205,198,181"; break; }
+                case "itm53": { bgrCode =  "218,212,199"; break; }
+                case "itm54": { bgrCode =  "230,227,218"; break; }
+                case "itm55": { bgrCode = "243,241,236"; break; }
+
+                case "itm61": { bgrCode = "78,204,124"; break; }
+                case "itm62": { bgrCode = "113,214,150"; break; }
+                case "itm63": { bgrCode =  "149,224,177"; break; }
+                case "itm64": { bgrCode =  "184,235,203"; break; }
+                case "itm65": { bgrCode =  "220,245,229"; break; }
+            }
+            List<string> Ccode = new List<string>();
+            Ccode = bgrCode.Split(Csplit).ToList();
+            if (ppApp.ActiveWindow.Selection.Type != PowerPoint.PpSelectionType.ppSelectionShapes)
+            {
+                MessageBox.Show("Please select a single shape  to format.", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            foreach (PowerPoint.Shape shp in ppApp.ActiveWindow.Selection.ShapeRange)
+            {
+                shp.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb( Convert.ToInt32(Ccode[0]), Convert.ToInt32(Ccode[1]), Convert.ToInt32(Ccode[2])).ToArgb();
+            }
+        }
         public void TSCP_Callback82(Office.IRibbonControl rib)
         {
             tscformat choObj = new tscformat();
@@ -307,6 +390,23 @@ namespace TSCPPT_Addin
         {
             frmEditorialReview eReview = new frmEditorialReview();
             eReview.Show();
+        }
+        public void btnfeedback_Click(Office.IRibbonControl rib)
+        {
+            Outlook.Application mailObj = Marshal.GetActiveObject("Outlook.Application") as Outlook.Application;
+            Outlook.MailItem newmail= mailObj.CreateItem(Outlook.OlItemType.olMailItem);
+            newmail.Subject = "Feedback - TSC PPT Addin";
+            newmail.To = "devendra.tripathi@thesmartcube.com";
+            newmail.Display();
+        }
+
+        public void btnInserttable_Click(Office.IRibbonControl rib)
+        {
+            pptfunctions funObj = new pptfunctions();
+            frmtable tbobj = new frmtable();
+            if (funObj.TSCThemeLoaded()) { tbobj.ShowDialog(); ; }
+            else { MessageBox.Show("This functionality works with TSC Theme. Please Load TSC theme and try again. Thanks", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            PPTAttribute.UserTracker(rib);
         }
         #endregion
     }

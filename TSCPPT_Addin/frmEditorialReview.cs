@@ -39,6 +39,7 @@ namespace TSCPPT_Addin
                 {
                     selSlides.Add(ppApp.ActiveWindow.Selection.SlideRange[i].SlideNumber);
                 }
+                
                 selSlides.Sort();
                 //Array.Sort(selSlides);
             }
@@ -70,6 +71,7 @@ namespace TSCPPT_Addin
 
         private void frmEditorialReview_Load(object sender, EventArgs e)
         {
+            PPTAttribute.reviewExitFlag = false;
             cmb_RType.Items.Add("Selected");
             cmb_RType.Items.Add("All");
             cmb_RType.SelectedIndex = 0;

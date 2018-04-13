@@ -43,6 +43,7 @@ namespace TSCPPT_Addin
             {
                 bool uUnload = false, globalErrors = false;
                 selectedSlides = ppApp.ActiveWindow.Selection.SlideRange.Count;
+                this.Close();
                 if (whichSlides == "Current" || whichSlides == "Selected")
                 {
 

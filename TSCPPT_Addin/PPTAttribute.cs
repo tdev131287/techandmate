@@ -26,13 +26,17 @@ namespace TSCPPT_Addin
         public static string txtbox= basePath+ @"AppData\Template\txtplaceholder.pptx";
        
         public static string PiCon = basePath + @"AppData\Image\Icon\";
+        public static string themeColor = basePath + @"AppData\Image\ThemeColor\";
+        public static string Tabletheme = basePath + @"AppData\Image\Tables\";
         //Standard
         public static PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
         public static PowerPoint.Presentation ActivePPT;
         public static string msgTitle = "The Smart Cube";
         public static string Error;
         public static bool exitFlag = false;
-        
+        public static int ErrIndex;
+        public static bool reviewExitFlag = false;
+        public static bool discardFlag = false;
         static public void UserTracker(Office.IRibbonControl rib)
         {
             String strUserName;
@@ -67,6 +71,7 @@ namespace TSCPPT_Addin
             {
                 string errtext = err.Message;
                 PPTAttribute.ErrorLog(errtext, "UserTracker");
+                //MessageBox.Show("Error in errorlog After Apply Theme");
             }
         }
         public static void ErrorLog(string ErrDis, string rib)
@@ -77,6 +82,7 @@ namespace TSCPPT_Addin
             {
                 string path = logfile + "ErrorLog_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
                 strUserName = Environment.UserName;
+                if (rib.Length <= 12) { return; }
                 if (rib.Substring(0, 12) == "customButton")
                 {
                     strWholeText = strUserName + "|" + getButtonDiscription(rib) + "|" + DateTime.Now.ToString() + "|" + ErrDis;
@@ -172,13 +178,17 @@ namespace TSCPPT_Addin
             DirectoryInfo dir = new DirectoryInfo(logfile);
             cnn = new SqlConnection(connetionString);
             try
-            {
+            {   
                 
                 foreach (FileInfo flInfo in dir.GetFiles())
                 {
+                    string fPath = logfile +@"\"+flInfo.Name;
                     string fname = flInfo.Name.Substring(0,flInfo.Name.IndexOf("_"));
-                    if (fname == "UserLog")
+                    string lname= flInfo.Name.Substring(flInfo.Name.IndexOf("_")+1, (Convert.ToInt32(flInfo.Name.Length) - flInfo.Name.IndexOf("_"))-5);
+                    string cDate = DateTime.Now.ToString("dd")+ DateTime.Now.ToString("MM")+ DateTime.Now.ToString("yyyy");  
+                    if (fname == "UserLog" && lname!= cDate)
                     {
+                        
                         //MessageBox.Show(flInfo.Name);
                         foreach (string line in File.ReadLines(logfile+ flInfo.Name))
                         {
@@ -199,6 +209,7 @@ namespace TSCPPT_Addin
                             cnn.Close();
                             cmd.Dispose();
                         }
+                        File.Delete(fPath);
                     }
                 }
                 //if (i != 0)

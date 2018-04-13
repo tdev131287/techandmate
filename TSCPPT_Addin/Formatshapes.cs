@@ -83,7 +83,10 @@ namespace TSCPPT_Addin
                 Activeshape.TextFrame.MarginTop = (float)Convert.ToDouble((dt.Rows[0]["MarginTop"]));
                 Activeshape.TextFrame.MarginBottom = (float)Convert.ToDouble((dt.Rows[0]["MarginBottom"]));
                 Activeshape.TextFrame.WordWrap = MsoTriState.msoCTrue;
-
+                if(Activeshape.Name == "Road Map")
+                {
+                    Activeshape.TextFrame2.TextRange.Font.Spacing = 1;
+                }
                 //----- Set shape text range format --
                 if (textAdjust == true)
                 {
@@ -96,6 +99,7 @@ namespace TSCPPT_Addin
                         {
                             Activeshape.TextFrame2.TextRange.Text = text[0] + "\r\n" + text[1] + "\r\n" + text[2] + "\r\n" + text[3];
                             //Activeshape.TextFrame.TextRange.Text = text[0] + '\n' + text[1] + '\n' + text[2] + '\n' + text[3];
+                            
                         }
                     }
                     else
@@ -150,6 +154,12 @@ namespace TSCPPT_Addin
 
                 if (Convert.ToString(dt.Rows[0]["Name"]) == "Note Box")
                 {
+                    Activeshape.TextFrame.Ruler.Levels[1].FirstMargin = 0;
+                    Activeshape.TextFrame.Ruler.Levels[1].LeftMargin = 0;
+                    for (int x=1;x<= txtRange.Paragraphs().Count;x++)
+                    {
+                        txtRange.Paragraphs(x).ParagraphFormat.HangingPunctuation = MsoTriState.msoFalse;
+                    }
                     //int txtLen = Convert.ToString(dt.Rows[0]["DefaultText"]).Length;
                     //if (txtRange.Text.PadLeft(txtLen) != Convert.ToString(dt.Rows[0]["DefaultText"]))
                     //{
@@ -161,6 +171,13 @@ namespace TSCPPT_Addin
                 //- - IF Source Box 
                 if (Convert.ToString(dt.Rows[0]["Name"]) == "Source Box")
                 {
+
+                    Activeshape.TextFrame.Ruler.Levels[1].FirstMargin = 0;
+                    Activeshape.TextFrame.Ruler.Levels[1].LeftMargin = 0;
+                    for (int x = 1; x <= txtRange.Paragraphs().Count; x++)
+                    {
+                        txtRange.Paragraphs(x).ParagraphFormat.HangingPunctuation = MsoTriState.msoFalse;
+                    }
                     //int txtLen = Convert.ToString(dt.Rows[0]["DefaultText"]).Length;
                     //if (txtRange.Text.PadLeft(txtLen) != Convert.ToString(dt.Rows[0]["DefaultText"]))
                     //{
