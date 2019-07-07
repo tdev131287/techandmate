@@ -11,6 +11,7 @@ namespace TSCPPT_Addin
 {
     public partial class ThisAddIn
     {
+        PPT_Ribbon rib = new PPT_Ribbon();
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             //MessageBox.Show("Call a Startup Method");
@@ -41,6 +42,7 @@ namespace TSCPPT_Addin
             Globals.ThisAddIn.Application.AfterNewPresentation += Application_AfterNewPresentation;
             Globals.ThisAddIn.Application.SlideSelectionChanged += Application_SlideSelectionChanged;
             Globals.ThisAddIn.Application.PresentationNewSlide += Application_PresentationNewSlide;
+            Globals.ThisAddIn.Application.WindowSelectionChange += Application_WindowSelectionChange;
             //Globals.ThisAddIn.Application.PresentationOpen += Application_PresentationOpen;
         }
 
@@ -75,7 +77,21 @@ namespace TSCPPT_Addin
             //throw new NotImplementedException();
         }
 
+        private void Application_WindowSelectionChange(PowerPoint.Selection Sel)
+        {
 
+            PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
+            PowerPoint.Presentation ActivePPT = Globals.ThisAddIn.Application.ActivePresentation;
+            if (ppApp.ActiveWindow.Selection.Type == PowerPoint.PpSelectionType.ppSelectionShapes)
+            {
+                foreach (PowerPoint.Shape shp in Sel.ShapeRange)
+                {
+                    PPTAttribute.shpList.Add(shp);
+                }
+            }
+            rib.buttonInvalidate();
+            //throw new NotImplementedException();
+        }
 
         #endregion
     }

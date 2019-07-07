@@ -175,12 +175,14 @@
             this.ClientSize = new System.Drawing.Size(373, 397);
             this.Controls.Add(this.fileGridView);
             this.Controls.Add(this.groupBox1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPPTFormat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Format Slide ";
             this.Load += new System.EventHandler(this.frmPPTFormat_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPPTFormat_KeyDown);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

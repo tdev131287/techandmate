@@ -18,16 +18,36 @@ namespace TSCPPT_Addin
          
         public static string basePath = System.AppDomain.CurrentDomain.BaseDirectory;
         public static string dbPath = basePath + @"AppData\Mapping\PPT_Specification.xlsx";
+        public static string imgmapping = basePath + @"AppData\Mapping\Image_Mapping.xlsx";
+        public static string Iconmapping = basePath + @"AppData\Mapping\IConmapping.xlsx";
         public static string WordList = basePath + @"AppData\Mapping\WordList.xlsx";
         public static string mPPTPath = basePath + @"AppData\Template\Template_Automation.pptx";
+        public static string ChartPPTPath = basePath + @"AppData\Template\ChartsTemplate.pptx";
         public static string standardppt = basePath + @"AppData\Template\Standard.pptx";
-        public static string logfile = basePath + @"AppData\Logfile\";
+        //public stati  string logfile = basePath + @"AppData\Logfile\";
+        public static string logfile = @"C:\";
         public static string supportfile = basePath + @"AppData\Mapping\support.txt";
         public static string txtbox= basePath+ @"AppData\Template\txtplaceholder.pptx";
        
         public static string PiCon = basePath + @"AppData\Image\Icon\";
         public static string themeColor = basePath + @"AppData\Image\ThemeColor\";
         public static string Tabletheme = basePath + @"AppData\Image\Tables\";
+        public static string Charttheme = basePath + @"AppData\Image\Chart\";
+
+        public static string dbPath1 = basePath + @"AppData\Mapping\Image_Mapping.xlsx";
+        public static string imagePath = basePath + @"AppData\image\Flags\";
+        public static string CFlag = basePath + @"AppData\image\CFlags\";
+        public static string ShapPath = basePath + @"AppData\image\Shapes\";
+        public static string CShapPath = basePath + @"AppData\image\CShapes\";
+        public static string MapPath = basePath + @"AppData\image\Maps\";
+        public static string layouts = basePath + @"AppData\image\Layouts\";
+        //
+        public static string infographicPath = basePath + @"AppData\image\Infographics\";
+        public static string mPPTMap = basePath + @"AppData\Template\Maps.pptx";
+        public static string DesignElement = basePath + @"AppData\Template\DesignElement.pptx";
+        public static string layoutppt = basePath + @"AppData\Template\Common Layouts.pptx";
+
+        //DesignElement
         //Standard
         public static PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
         public static PowerPoint.Presentation ActivePPT;
@@ -37,16 +57,28 @@ namespace TSCPPT_Addin
         public static int ErrIndex;
         public static bool reviewExitFlag = false;
         public static bool discardFlag = false;
+        public static List<PowerPoint.Shape> shpList = new List<PowerPoint.Shape>();
+        public static List<string> tableType = new List<string>();
         static public void UserTracker(Office.IRibbonControl rib)
         {
             String strUserName;
             String strWholeText;
             try
             {
-                string path = logfile + "UserLog_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
+                PowerPoint.Presentation ActivePPT = Globals.ThisAddIn.Application.ActivePresentation;
+                string newPath;
+                if (!Directory.Exists(logfile + @"TheSmartCube\Log\"))
+                {
+                    newPath = logfile + @"TheSmartCube\Log\";
+                }
+                else
+                {
+                    newPath = logfile + @"TheSmartCube\Log\";
+                }
+                string path = newPath + "UserLog_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
                 strUserName = Environment.UserName;
 
-                strWholeText = strUserName + "|" + getButtonDiscription(rib.Id) + "|" + DateTime.Now.ToString();
+                strWholeText = strUserName + "|" + getButtonDiscription(rib.Id) + "|" + DateTime.Now.ToString() + "|" + ActivePPT.Name;
 
                 if (!File.Exists(path))
                 {
@@ -80,16 +112,27 @@ namespace TSCPPT_Addin
             String strWholeText;
             try
             {
-                string path = logfile + "ErrorLog_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
-                strUserName = Environment.UserName;
-                if (rib.Length <= 12) { return; }
-                if (rib.Substring(0, 12) == "customButton")
+                PowerPoint.Presentation ActivePPT = Globals.ThisAddIn.Application.ActivePresentation;
+                string newPath;
+                if (!Directory.Exists(logfile + @"TheSmartCube\Log\"))
                 {
-                    strWholeText = strUserName + "|" + getButtonDiscription(rib) + "|" + DateTime.Now.ToString() + "|" + ErrDis;
+                    newPath = logfile + @"TheSmartCube\Log\";
                 }
                 else
                 {
-                    strWholeText = strUserName + "|" + rib + "|" + DateTime.Now.ToString() + "|" + ErrDis;
+                    newPath = logfile + @"TheSmartCube\Log\";
+                }
+                System.IO.Directory.CreateDirectory(newPath);
+                string path = newPath + "ErrorLog_" + DateTime.Now.ToString("ddMMyyyy") + ".txt";
+                strUserName = Environment.UserName;
+                if (rib.Length <= 12) { return; }
+                if (getButtonDiscription(rib)!=null)
+                {
+                    strWholeText = strUserName + "|" + getButtonDiscription(rib) + "|" + ErrDis +"|" + DateTime.Now.ToString() +"|"+ActivePPT.Name;
+                }
+                else
+                {
+                    strWholeText = strUserName + "|" + rib +  "|" + ErrDis + "|" + DateTime.Now.ToString()+ "|" + ActivePPT.Name;
                 }
                 if (!File.Exists(path))
                 {
@@ -132,7 +175,8 @@ namespace TSCPPT_Addin
             catch(Exception err)
             {
                 string errtext = err.Message;
-                PPTAttribute.ErrorLog(errtext, "getButtonDiscription");
+                //PPTAttribute.ErrorLog(errtext, "getButtonDiscription");
+                return (btndiscription);
             }
             return (btndiscription);
         }
@@ -141,7 +185,8 @@ namespace TSCPPT_Addin
 
             try
             {
-                string path = logfile + "Spacification_" + shpName + ".txt";
+                string newPath = logfile + @"TheSmartCube\Log\";
+                string path = newPath + "Spacification_" + shpName + ".txt";
                 if (!File.Exists(path))
                 {
                     using (StreamWriter sw = File.CreateText(path))
@@ -167,6 +212,7 @@ namespace TSCPPT_Addin
             }
         }
 
+        
        
         public static void SQLConnection()
         {

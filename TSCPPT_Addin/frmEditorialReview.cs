@@ -67,6 +67,8 @@ namespace TSCPPT_Addin
                     else if (rb_CorrectAll.Checked == true) { EObj.CorrectEditorial(sldNum); }
                 }
             }
+            MessageBox.Show("Editoral Review has been done", PPTAttribute.msgTitle);
+            this.Close();
         }
 
         private void frmEditorialReview_Load(object sender, EventArgs e)

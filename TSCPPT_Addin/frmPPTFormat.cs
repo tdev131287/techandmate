@@ -319,5 +319,13 @@ namespace TSCPPT_Addin
         {
             this.Close();
         }
+
+        private void frmPPTFormat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

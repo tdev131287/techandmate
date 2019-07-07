@@ -27,7 +27,10 @@ namespace TSCPPT_Addin
                 List<int> rgbVal1 = new List<int>();
                 //if (textAdjust == false) { textAdjust = true; }
                 //if (sizeAdjust == false) { sizeAdjust = true; }
-                Activeshape.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                if (Convert.ToString(dt.Rows[0]["Name"]) != "Cagr Box")
+                {
+                    Activeshape.Name = Convert.ToString(dt.Rows[0]["Name"]);
+                }
                 //-- Selected object is line --
                 Activeshape.Line.Visible = pptMsoObject.getMsoTriState(Convert.ToInt32(dt.Rows[0]["LineVisible"])); //MsoTriState.msoTrue;                               // Apply a msoValue Condition 
                 Activeshape.Fill.Visible = pptMsoObject.getMsoTriState(Convert.ToInt32(dt.Rows[0]["FillVisible"]));//MsoTriState.msoFalse;   
@@ -117,7 +120,7 @@ namespace TSCPPT_Addin
                 Activeshape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(rgbVal[0], rgbVal[1], rgbVal[2]).ToArgb();          // Apply a msoValue Condition
                 Activeshape.TextFrame.TextRange.Font.Shadow = pptMsoObject.getMsoTriState(Convert.ToInt32(dt.Rows[0]["Shadow"])); //MsoTriState.msoFalse;                       // Apply a msoValue Condition
 
-                Activeshape.TextFrame.TextRange.Paragraphs(1).ParagraphFormat.Bullet.Type = pptMsoObject.getPpBulletType(Convert.ToInt32(dt.Rows[0]["ParagraphBullet"]));  // Apply a msoValue Condition(Need to Check)
+                //Activeshape.TextFrame.TextRange.Paragraphs(1).ParagraphFormat.Bullet.Type = pptMsoObject.getPpBulletType(Convert.ToInt32(dt.Rows[0]["ParagraphBullet"]));  // Apply a msoValue Condition(Need to Check)
 
                 // ---- Set the ParagraphFormat --
                 Activeshape.TextFrame.TextRange.ParagraphFormat.Alignment = pptMsoObject.ParagraphFormatAlignment(Convert.ToInt32(dt.Rows[0]["ParagraphAlignment"]));//PowerPoint.PpParagraphAlignment.ppAlignRight;               // Apply a msoValue Condition
@@ -417,7 +420,7 @@ namespace TSCPPT_Addin
                     else { CorrectFormat_MainSlide(sldnum, shp); }
                 }
                 DeleteFormatComments_M3(sldnum);
-                MessageBox.Show("Format review and correction has been done", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
             }
             catch(Exception err)
             {

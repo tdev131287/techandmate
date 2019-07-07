@@ -341,7 +341,7 @@ namespace TSCPPT_Addin
         public void FormatBulletInShape(int sldNum,string shpname)
         {
             PowerPoint.Presentation actPPT = Globals.ThisAddIn.Application.Presentations.Open(PPTAttribute.mPPTPath);
-            actPPT.Slides[4].Shapes["Text Placeholder 21"].PickUp();
+            actPPT.Slides[3].Shapes["Text Box"].PickUp();
             try
             {
                 ActivePPT.Slides[sldNum].Shapes[shpname].Apply();

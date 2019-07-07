@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load" loadImage="OnLoadImage">
+  <ribbon>
+    <tabs>
+      <tab id="myTab" label="The Smart Cube" insertBeforeMso="TabHome" >
+        <group id="grp_TEssential" label="Template Essentials">
+          <button id="customButton11" label="Load Theme" keytip="L" getImage="setImage" size="normal" onAction="TSCP_Callback11" supertip="Load TSC 2018 Theme in active presentation."/>
+          <button id="customButton12" label="Start New PPT" keytip="N" imageMso="CreateReportFromWizard" size="normal" onAction="TSCP_Callback12" supertip="Start a new presentation with TSC 2018 Theme."/>
+          <menu id="menu11" label="Add Slides" imageMso="ViewsReportView" keytip="M" size="normal" itemSize="normal" supertip="Insert TSC formatted slides in active presentation.">
+            <button id="customButton13" label="Title Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC Title Slide format at the beginning of active presentation." />
+            <button id="customButton14" label="Content Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC content page format after active slide."/>
+            <button id="customButton15" label="Section Heading" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC section heading format after active slide."/>
+            <button id="customButton16" label="Framework Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC framework slide format after active slide."/>
+            <button id="customButton17" label="Blank Slide" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC blank slide format after active slide."/>
+            <button id="customButton18" label="End Page" getImage="setImage" onAction="TSCP_Callback13" supertip="Insert TSC end page at the end of active presentation."/>
+          </menu>
+        </group>
+
+        <group id="grp_SComponent" label="Slide Component">
+          <menu id="menu21" label="  Insert  " imageMso="Paste" keytip="R" size="normal"  itemSize="normal" supertip="Insert slide components on active slide." >
+            <button id="customButton21" label="Road Map" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert road map on active slide."/>
+            <button id="customButton22" label="Slide Title" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert title box on active slide." />
+            <button id="customButton23" label="Text Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert text box on active slide." />
+            <button id="customButton24" label="Note Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert note box on active slide."/>
+            <button id="customButton25" label="Source Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert source box on active slide."/>
+            <!--<button id="customButton26" label="Chart Title" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert chart title on active slide."/>-->
+            <!--<button id="customButton27" label="Quote Box" getImage="setImage" onAction="TSCP_Callback_Insert" supertip="Insert quote box on active slide."/>-->
+          </menu>
+
+          <menu id="menu32" label="  Format  " imageMso="Copy" keytip="S" size="normal" itemSize="normal" supertip="Format slide components on active slide.">
+            <button id="customButton31" label="as Road Map" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as road map on active slide."/>
+            <button id="customButton32" label="as Slide Title" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as title box on active slide."/>
+            <button id="customButton33" label="as Text Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as text box on active slide." />
+            <button id="customButton34" label="as Note Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as note box on active slide."/>
+            <button id="customButton35" label="as Source Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as source box on active slide."/>
+            <button id="customButton36" label="as Chart Title" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as chart title on active slide."/>
+            <button id="customButton37" label="as Quote Box" getImage="setImage" onAction="TSCP_Callback_Format" supertip="Format as chart title on active slide."/>
+          </menu>
+        </group>
+        <group id="Ginsert" label="Insert">
+          <button id="btnInsertImage" imageMso="ViewsReportView" onAction="btnInsertImage_Click" supertip="Insert Image ." size="normal"/>
+          <button id="btnInsertMap" imageMso="ViewsReportView" onAction="btnInsertMap_Click" supertip="btnInsertMap ." size="normal"/>
+          <button id="btnInserttable"  imageMso="TableInsertExcel" onAction="btnInserttable_Click" supertip="btnInsertMap ." size="normal"/>
+        </group>
+        <group id="Gformat" label="Formating Tools">
+          <button id="btnbullet1" label="Bullet-1" getImage="setImage" size="normal" onAction="btnbullet_Click"/>
+          <button id="btnbullet2" label="Bullet-2" getImage="setImage" size="normal" onAction="btnbullet_Click"/>
+          <button id="btnbullet3" label="Bullet-3" getImage="setImage" size="normal" onAction="btnbullet_Click"/>
+          
+          <button id="btnformatPPT" imageMso="ChartStylesGallery" size="normal" onAction="btnformatPPT_Click" />
+          <button id="btnformatTable" imageMso="ChartStylesGallery" onAction="btnformatTable_Click" size="normal"/>
+          <button id="btnformatCAGR" imageMso="ChartStylesGallery" onAction="btnformatCAGR_Click" size="normal"/>
+          <button id="btndistanceformat" imageMso="ChartStylesGallery" onAction="btndistanceformat_Click" size="normal"/>
+          <button id="btnAlignshape" imageMso="ChartStylesGallery" onAction="btnAlignshape_Click" size="normal"/>
+          <button id="btnshapeswap" imageMso="ChartStylesGallery" onAction="btnshapeswap_Click" size="normal"/>
+          <gallery id="galTest" size="normal" showItemLabel="true" columns="5" rows="6" itemHeight="15" itemWidth="15" imageMso="AppointmentColorDialog" onAction="GalleryOnAction">
+
+            <item id="itm11" image ="IMG_11.png" />
+            <item id="itm12" image ="IMG_12.png" />
+            <item id="itm13" image ="IMG_13.png" />
+            <item id="itm14" image ="IMG_14.png" />
+            <item id="itm15" image ="IMG_15.png" />
+
+            <item id="itm21" image ="IMG_21.png" />
+            <item id="itm22" image ="IMG_22.png" />
+            <item id="itm23" image ="IMG_23.png" />
+            <item id="itm24" image ="IMG_24.png" />
+            <item id="itm25" image ="IMG_25.png" />
+
+            <item id="itm31" image ="IMG_31.png" />
+            <item id="itm32" image ="IMG_32.png" />
+            <item id="itm33" image ="IMG_33.png" />
+            <item id="itm34" image ="IMG_34.png" />
+            <item id="itm35" image ="IMG_35.png" />
+
+            <item id="itm41" image ="IMG_41.png" />
+            <item id="itm42" image ="IMG_42.png" />
+            <item id="itm43" image ="IMG_43.png" />
+            <item id="itm44" image ="IMG_44.png" />
+            <item id="itm45" image ="IMG_45.png" />
+
+            <item id="itm51" image ="IMG_51.png" />
+            <item id="itm52" image ="IMG_52.png" />
+            <item id="itm53" image ="IMG_53.png" />
+            <item id="itm54" image ="IMG_54.png" />
+            <item id="itm55" image ="IMG_55.png" />
+
+            <item id="itm61" image ="IMG_61.png" />
+            <item id="itm62" image ="IMG_62.png" />
+            <item id="itm63" image ="IMG_63.png" />
+            <item id="itm64" image ="IMG_64.png" />
+            <item id="itm65" image ="IMG_65.png" />
+
+          </gallery>
+          <button id="btnRemoveInternalMargin" imageMso="ChartStylesGallery"  onAction="btnRemoveInternalMargin_Click"/>
+          <menu id="menuRemove" imageMso="ViewsReportView" supertip="Remove unnessary object space.">
+            <button id="btnRemoveDoubleSpace" label="Double Space" imageMso="ChartStylesGallery"  onAction="btnRemove_Click"/>
+            <button id="btnRemoveEmptyplaceholder" label="Empty place holders" imageMso="ChartStylesGallery"  onAction="btnRemove_Click"/>
+            <button id="btnRemove3D_effects" label="3D and other effects" imageMso="ChartStylesGallery"  onAction="btnRemove_Click"/>
+            <button id="btnRemoveSlideAnimations" label="Slides animations" imageMso="ChartStylesGallery"  onAction="btnRemove_Click"/>
+            <button id="btnRemoveSlideTransitions" label="Slides Transitions" imageMso="ChartStylesGallery"  onAction="btnRemove_Click"/>
+          </menu>
+          
+          
+        </group>
+        <group id="grp_CFunction" label="ChartFunction">
+          <menu id="menu41" label=" Insert Chart " imageMso="SlideMasterChartPlaceholderInsert" keytip="I" size="large" itemSize="large" supertip="Insert TSC standard charts on active slide.">
+            <button id="customButton41" label="Clustered Column" getImage="setImage" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard clustered column chart on active slide."/>
+            <button id="customButton42" label="Stacked Column" getImage="setImage" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard slacked column chart on active slide."/>
+            <button id="customButton44" label="Pie Chart" getImage="setImage" onAction="TSCP_Callback_Chart" supertip="Insert TSC standard pie chart on active slide."/>
+            
+          </menu>
+          <button id="customButton46" label=" Format Chart" imageMso="ChartStylesGallery" keytip="F" size="large" onAction="TSCP_Callback46" screentip="Format Chart" supertip="Format selected chart with TSC formatting guidelines." />
+          <dropDown id="dropDown4D1" showLabel="true" label="Color Scheme" getSelectedItemID="GetSelectedItem4D1" onAction="TSCP_Callback4D1" sizeString="WWWWW">
+            <item id="item1" label="Scheme 1" />
+            <item id="item2" label="Scheme 2" />
+            <item id="item3" label="Scheme 3" />
+            <item id="item4" label="Scheme 4" />
+          </dropDown>
+
+          <dropDown id="dropDown4D2" showLabel="true" label=" Data Labels" getSelectedItemID="GetSelectedItem4D2" onAction="TSCP_Callback4D2" sizeString="WWWWW">
+            <item id="item6" label="Show" />
+            <item id="item7" label="Hide" />
+          </dropDown>
+
+          <dropDown id="dropDown4D3" showLabel="true" label="  Y-Axis    " getSelectedItemID="GetSelectedItem4D3" onAction="TSCP_Callback4D3" sizeString="WWWWW" >
+            <item id="item8" label="Show" />
+            <item id="item9" label="Hide" />
+          </dropDown>
+        </group>
+
+        <group id="grp_Calc" label="Caluclation">
+          <button id="customButton51" label="Growth Rates" keytip="G" imageMso="ChartGridlines" size="large" onAction="TSCP_Callback51" supertip="Calculate CAGR of various series of selected chart."/>
+          <button id="customButton52" label="Sum of  Pie Chart " keytip="J" imageMso="AutoSum" size="large" onAction="TSCP_Callback52" supertip="Calculate Sum of series of selected Pie chart."/>
+        </group>
+
+        <group id="grp_Review" label="Review">
+          <button id="customButton61" label="Format Review" keytip="D" imageMso="AdpDiagramTableModesMenu" size="large"  onAction="TSCP_Callback61" supertip="Reviews formatting errors in selected slides." />
+          <button id="customButton62" label="Editorial Review" keytip="E" imageMso="FileViewDigitalSignatures" size="large"  onAction="TSCP_Callback62" supertip="Reviews Editorial errors in selected slides."/>
+          <button id="btnComparePPT" label="Compare PPT" keytip="E" imageMso="FileViewDigitalSignatures" size="large"  onAction="btnComparePPT_Click" supertip="Compare PPT ."/>
+        </group>
+        <group id="grp_Organize" label="Organize">
+          <menu id="menuselectshape" imageMso="ViewsReportView" supertip="Select objects based on current selected object.">
+            <button id="btnselectsameColor" label="Same color" imageMso="ChartStylesGallery"  onAction="btnselectshape_Click"/>
+            <button id="btnselectsameType" label="Same type" imageMso="ChartStylesGallery"  onAction="btnselectshape_Click"/>
+            <button id="btnselectsameHeight" label="Same height" imageMso="ChartStylesGallery"  onAction="btnselectshape_Click"/>
+            <button id="btnselectsameWeight" label="Same width" imageMso="ChartStylesGallery"  onAction="btnselectshape_Click"/>
+            <button id="btnselectsameSize" label="Same size" imageMso="ChartStylesGallery"  onAction="btnselectshape_Click"/>
+          </menu>
+          <toggleButton idMso="Bold"/>
+          <gallery idMso="FontColorPicker"/>
+        </group>
+        <group id="grp_Tools" label="Tools">
+            <button id="customButton71" label="Change Language" imageMso="ViewWebLayoutView" keytip="A" size="large" onAction="TSCP_Callback71" supertip="Change language in all objects in all slides of active presentation."/>
+				    <!--<button id="customButton72" label="Collate Source" imageMso="FileExcelServicesOptions" keytip="B" size="large" onAction="TSCP_Callback72" supertip="Aggregate sources from all slides in a seperate slide."/>
+				    <button id="customButton73" label="Insert Infographics" imageMso="ClipArtInsert" keytip="I1" size="large" onAction="TSCP_Callback73" supertip="Insert Infographics from TSC Library."/>
+				    <button id="customButton73A" label="Insert Icons" imageMso="SlideMasterClipArtPlaceholderInsert" keytip="I1" size="large" onAction="TSCP_Callback73A" supertip="Insert Icons from TSC Library."/>
+				    <button id="customButton73B" label="Insert Images" imageMso="ControlLogo" keytip="I2" size="large" onAction="TSCP_Callback73B" supertip="Insert Images from TSC Library."/>
+				    <button id="customButton74" label="Insert Symbol" imageMso="FontSchemes" keytip="T" size="normal" onAction="TSCP_Callback74" supertip="Insert commonly used symbol at current curson position of active slide."/>
+				    <button id="customButton75" label="Save Slides" imageMso="SaveAndNew" keytip="U" size="normal" onAction="TSCP_Callback75" supertip="Save selected slides of active presentation at the user specified location."/>
+				    <button id="customButton76" label="Send Slides" imageMso="SaveAttachments" keytip="V" size="normal" onAction="TSCP_Callback76" supertip="Send selected slides of active presentaiton using outlook application."/>-->
+        </group>
+
+        <group id="grp_Help" label="Help">
+          <button id="btnfeedback" label="Feebback" keytip="O" imageMso="TentativeAcceptInvitation" size="normal" onAction="btnfeedback_Click" supertip="Read version information or report an issue."/>
+          <!--<button id="btnfeedback" label="Feedback" keytip="O" imageMso="TentativeAcceptInvitation" size="normal" onAction="btnfeedback_Click" supertip="Click on this button a give a feedback of this automation."/>-->
+          <button id="customButton81" label="About" keytip="O" imageMso="TentativeAcceptInvitation" size="normal" onAction="TSCP_Callback81" supertip="Read version information or report an issue."/>
+          <button id="customButton82" label="Help" keytip="H" imageMso="CategoryCollapse" size="normal" onAction="TSCP_Callback82" supertip="Open help document for TSC Addin."/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+

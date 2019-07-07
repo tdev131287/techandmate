@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+using System.Text.RegularExpressions;
+
 namespace TSCPPT_Addin
 {
     public partial class frmChartcalc : Form
@@ -29,6 +31,7 @@ namespace TSCPPT_Addin
             List<String> xxVals = new List<string>();
             List<String> yyVals = new List<string>();
             List<string> Seriesname = new List<string>();
+
             try
             {
                 int sld_num = ppApp.ActiveWindow.Selection.SlideRange.SlideNumber;
@@ -67,7 +70,8 @@ namespace TSCPPT_Addin
                 cmb_Series.Items.Clear();
                 foreach (string item in yyVals)
                 {
-                    cmb_stDate.Items.Add(item);
+                //Regex.Match(item, @"\d+").Value
+                    cmb_stDate.Items.Add(Regex.Match(item, @"\d+").Value);
                     cmb_stDate.SelectedIndex = 0;
                     //cmb_endDate.Items.Add(item);
                     //cmb_endDate.SelectedIndex = 0;
@@ -82,15 +86,15 @@ namespace TSCPPT_Addin
                 cmb_calcType.SelectedIndex = 0;
                 if (cmbText == "AAGR") { Calculate_AAGR(); }
                 else { Calculate_CAGR(); }
-            }
+        }
             catch (Exception err)
             {
                 this.Close();
-                string errtext = err.Message;
-                PPTAttribute.ErrorLog(errtext, "frmChartcalc_Load");
-                //MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        string errtext = err.Message;
+        PPTAttribute.ErrorLog(errtext, "frmChartcalc_Load");
+                MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+}
 
 
 
@@ -104,16 +108,38 @@ namespace TSCPPT_Addin
             try
             {
                 int type = cmb_Series.SelectedIndex + 1;
-                for (int x = 0; x < num_points; x++) { if (pStart == chtData[x, 0]) { stVal = x; } }
+                //Regex.Match(chtData[x, 0], @"\d+").Value
+                for (int x = 0; x < num_points; x++) { if (pStart == Regex.Match(chtData[x, 0], @"\d+").Value) { stVal = x; } }
                 for (int x = 0; x < num_points; x++)
                 {
-                    if (pEnd == chtData[x, 0])
+                    if (pEnd == Regex.Match(chtData[x, 0], @"\d+").Value)
                     {
                         endVal = x;
                     }
                 }
-                float sValue = (float)Convert.ToDouble(chtData[stVal, type]);
-                float eValue = (float)Convert.ToDouble(chtData[endVal, type]);
+                // Regex.Match(item, @"\d+").Value
+                float sValue;
+                string output = Regex.Match(chtData[stVal, type], @"\d+").Value;
+                if (String.IsNullOrWhiteSpace(output))
+                {
+                    sValue = 0;
+                }
+                else
+                {
+                    sValue = (float)Convert.ToDouble(output);
+                }
+                string output1 = Regex.Match(chtData[endVal, type], @"\d+").Value;
+                float eValue;
+                if (String.IsNullOrWhiteSpace(output))
+                {
+                    eValue = 0;
+                }
+                else
+                {
+                    eValue = (float)Convert.ToDouble(output1);
+                }
+
+               
                 if (diffVal == 0) { diffVal = endVal - stVal; }
 
 
@@ -142,16 +168,17 @@ namespace TSCPPT_Addin
                     CAGR = 0;
                     lbl_Value.Text = CAGR.ToString("P");
                 }
+
             }
             catch (Exception err)
             {
                 this.Close();
                 string errtext = err.Message;
                 PPTAttribute.ErrorLog(errtext, "Calculate_CAGR");
-                MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-        }
+}
         public void Calculate_AAGR()
         {
             List<float> diffVal = new List<float>();
@@ -165,7 +192,10 @@ namespace TSCPPT_Addin
                 lYear = Convert.ToInt32(cmb_endDate.Text);
                 for (int x = 1; x < num_points; x++)
                 {
-                    int year = (int)Convert.ToDouble(chtData[x, 0]);
+                    string output = Regex.Match(chtData[x, 0], @"\d+").Value;
+                    int year = (int)Convert.ToDouble(output);
+
+                    
                     if (year >= stYear && year <= lYear)
                     {
                         float diff = (float)Convert.ToDouble(chtData[x, type]) / (float)Convert.ToDouble(chtData[x - 1, type]);
@@ -183,7 +213,7 @@ namespace TSCPPT_Addin
             }
             catch (Exception err)
             {
-                this.Close();
+                //this.Close();
                 string errtext = err.Message;
                 PPTAttribute.ErrorLog(errtext, "Calculate_AAGR");
                 MessageBox.Show("Check chart type and chart value", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -195,7 +225,11 @@ namespace TSCPPT_Addin
             {
                 int l = cmb_stDate.SelectedIndex;
                 cmb_endDate.Items.Clear();
-                for (int i = l; i < num_points; i++) { cmb_endDate.Items.Add(chtData[i, 0]); }
+                for (int i = l; i < num_points; i++)
+                {
+                    string xx = Regex.Match(chtData[i, 0], @"\d+").Value;
+                    cmb_endDate.Items.Add(xx);
+                }
                 cmb_endDate.SelectedIndex = cmb_endDate.Items.Count - 1;
                 //Calculate_CAGR();
 
@@ -225,6 +259,7 @@ namespace TSCPPT_Addin
             int sld_num = ppApp.ActiveWindow.Selection.SlideRange.SlideNumber;
             float top_adjust = 0;
             int cnt = 0;
+            Formatshapes obj = new Formatshapes();
             string CAGR, dText = null;
             List<string> SelectedCharts = new List<string>();
             try
@@ -257,6 +292,15 @@ namespace TSCPPT_Addin
                 }
 
                 float tp = ActivePPT.Slides[sld_num].Shapes[shp_nam].Top;
+                foreach(PowerPoint.Shape shp in ActivePPT.Slides[sld_num].Shapes)
+                {
+                    if(shp.Name== shp_nam + " CAGR Box")
+                    {
+                        shp.Delete();
+                        break;
+                    }
+                }
+
                 PowerPoint.Shape aShp = ActivePPT.Slides[sld_num].Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, myShape.Left + myShape.Width, myShape.Top + top_adjust, 120, (float)23.5);
                 aShp.TextFrame.TextRange.Text = dText;
                 aShp.TextEffect.Alignment = MsoTextEffectAlignment.msoTextEffectAlignmentCentered;
@@ -273,6 +317,10 @@ namespace TSCPPT_Addin
                 aShp.Line.ForeColor.RGB = System.Drawing.Color.FromArgb(23, 94, 84).ToArgb();
                 aShp.Line.BackColor.RGB = System.Drawing.Color.FromArgb(23, 94, 84).ToArgb();
                 aShp.Name = shp_nam + " CAGR Box";
+                string objType = "Cagr Box";
+                PPTActions actionObj = new PPTActions();
+                DataTable dt = actionObj.get_specification(objType);
+                obj.FormatShape(sld_num, aShp.Name, dt, false, false);
                 this.Close();
             }
             catch (Exception err)
@@ -330,6 +378,19 @@ namespace TSCPPT_Addin
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void frmChartcalc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void frmChartcalc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
 
         private void cmb_calcType_SelectedIndexChanged(object sender, EventArgs e)

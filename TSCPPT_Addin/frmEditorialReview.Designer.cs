@@ -106,6 +106,7 @@
             this.rb_CorrectAll.TabStop = true;
             this.rb_CorrectAll.Text = "Correct All";
             this.rb_CorrectAll.UseVisualStyleBackColor = true;
+            this.rb_CorrectAll.Visible = false;
             // 
             // rb_ReviewCorrect
             // 
@@ -137,6 +138,7 @@
             this.label6.Size = new System.Drawing.Size(347, 13);
             this.label6.TabIndex = 1;
             this.label6.Text = "Reviews for formatting errors and corrects all errors without user concent";
+            this.label6.Visible = false;
             // 
             // label5
             // 
@@ -158,6 +160,7 @@
             // 
             // cmb_RType
             // 
+            this.cmb_RType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RType.FormattingEnabled = true;
             this.cmb_RType.Location = new System.Drawing.Point(151, 19);
             this.cmb_RType.Name = "cmb_RType";
@@ -197,13 +200,17 @@
             // 
             // frmEditorialReview
             // 
+            this.AcceptButton = this.btn_Review;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 305);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmEditorialReview";
-            this.Text = "frmEditorialReview";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Editorial Review";
             this.Load += new System.EventHandler(this.frmEditorialReview_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

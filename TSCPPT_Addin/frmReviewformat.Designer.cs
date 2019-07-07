@@ -68,6 +68,7 @@
             // 
             // cmb_RType
             // 
+            this.cmb_RType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_RType.FormattingEnabled = true;
             this.cmb_RType.Location = new System.Drawing.Point(151, 19);
             this.cmb_RType.Name = "cmb_RType";
@@ -204,6 +205,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmReviewformat";
@@ -211,6 +213,7 @@
             this.Text = "Review format";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmReviewformat_FormClosed);
             this.Load += new System.EventHandler(this.frmReviewformat_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmReviewformat_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

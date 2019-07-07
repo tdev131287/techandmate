@@ -41,6 +41,7 @@ namespace TSCPPT_Addin
                     float shpHeight = shp.Height;                           //ShapeHeight
                     float rot = shp.Rotation;                                 //Rotaion
                     MsoTriState lrvalue = shp.LockAspectRatio;              //LockAspectRatio
+
                     MsoTextOrientation txtOrientation = shp.TextFrame.Orientation;      //Orientation
                     MsoVerticalAnchor txtAnchor = shp.TextFrame.VerticalAnchor;         //VerticalAnchor
                     PowerPoint.PpAutoSize autosize = shp.TextFrame.AutoSize;            //AutoSize
@@ -505,16 +506,16 @@ namespace TSCPPT_Addin
             {
                 myChart.PlotArea.Border.LineStyle = PowerPoint.XlLineStyle.xlLineStyleNone;
                 myChart.PlotArea.Interior.ColorIndex = PowerPoint.XlColorIndex.xlColorIndexAutomatic;
-                if (chType == "Pie" || chType == "Doughnut") { }
-                else
-                {
-                    myChart.PlotArea.Left = 8;
-                    if (myChart.HasTitle == true) { myChart.PlotArea.Top = myChart.ChartArea.Top + myChart.ChartTitle.Top; }
-                    else { myChart.PlotArea.Top = 8; }
-                    myChart.PlotArea.Width = myChart.ChartArea.Width - 24;
-                    if (myChart.HasLegend == true) { myChart.PlotArea.Height = myChart.ChartArea.Height - myChart.Legend.Height * 2; }
-                    else { myChart.PlotArea.Height = myChart.ChartArea.Height - 16; }
-                }
+                //if (chType == "Pie" || chType == "Doughnut") { }
+                //else
+                //{
+                //    myChart.PlotArea.Left = 8;
+                //    if (myChart.HasTitle == true) { myChart.PlotArea.Top = myChart.ChartArea.Top + myChart.ChartTitle.Top; }
+                //    else { myChart.PlotArea.Top = 8; }
+                //    myChart.PlotArea.Width = myChart.ChartArea.Width - 24;
+                //    if (myChart.HasLegend == true) { myChart.PlotArea.Height = myChart.ChartArea.Height - myChart.Legend.Height * 2; }
+                //    else { myChart.PlotArea.Height = myChart.ChartArea.Height - 16; }
+                //}
 
             }
             catch (Exception err)

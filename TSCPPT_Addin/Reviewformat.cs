@@ -35,6 +35,7 @@ namespace TSCPPT_Addin
                 if (shpNames.Count != 0)
                 {
 
+                    DeleteFormatComments_M1(sldNum);                    // Delete all comment from slide
                     for (int s = 0; s < shpNames.Count; s++)
                     {
                         shpErr = null;
@@ -60,13 +61,13 @@ namespace TSCPPT_Addin
 
                         errA = shpErr.Split(spltChar).ToList();
                         errAU = UniqueValues(errA);
-                        string fshpErr = null;
-                        int counter = 1;
-                        foreach (string err in errAU)
-                        {
-                            fshpErr = fshpErr + (counter + 1) + ")  " + err + '\n';
-                        }
-                        DeleteFormatComments_M1(sldNum, shpName);
+                        //string fshpErr = null;
+                        //int counter = 1;
+                        //foreach (string err in errAU)
+                        //{
+                        //    fshpErr = fshpErr + (counter + 1) + ")  " + err + '\n';
+                        //}
+                        
                         if (method == "method1")
                         {
 
@@ -75,6 +76,7 @@ namespace TSCPPT_Addin
                             float tp = ActivePPT.Slides[sldNum].Shapes[shpName].Top;
                             if (shpErr != null && string.IsNullOrEmpty(shpErr.Replace("\n", "")) == false)
                             {
+                                
                                 PowerPoint.Comment cmtNew = ActivePPT.Slides[sldNum].Comments.Add((lf + wb), tp, shpName + " Error", "TFR", shpErr);
                             }
                         }
@@ -351,7 +353,7 @@ namespace TSCPPT_Addin
             List<string> uniqueErr = new List<string>();
             return (uniqueErr);
         }
-        public void DeleteFormatComments_M1(int sldNum, string shpName)
+        public void DeleteFormatComments_M1(int sldNum)
         {
             int numComments = ActivePPT.Slides[sldNum].Comments.Count;
             try
@@ -545,6 +547,25 @@ namespace TSCPPT_Addin
                 if (curShape.Rotation != Rotaion || curShape.TextFrame.Orientation != msoObj.getOrientation(Orientation) || curShape.LockAspectRatio != msoObj.getMsoTriState(LARatio))
                 {
                     sErr = sErr + "Size and rotation" + '\n';
+                }
+                //getVerticalAnchor
+                int shpAnchor = Convert.ToInt32(dt.Rows[0]["VerticalAnchor"]);//VerticalAnchor
+                if (curShape.TextFrame.VerticalAnchor != msoObj.getVerticalAnchor(shpAnchor))
+                {
+                    sErr = sErr + "Vertical alengment error" + '\n';
+                }
+                //ppAutoSizeShapeToFitText  TxtAutoSize
+                int autosize = Convert.ToInt32(dt.Rows[0]["AutoSize"]);//TxtAutoSize
+                if (curShape.TextFrame.AutoSize!= msoObj.TxtAutoSize(shpAnchor))
+                {
+                    sErr = sErr + "Shape tex fit error" + '\n';
+                }
+                //RulerLevel1LeftMargin
+                //Activeshape.TextFrame.Ruler.Levels[1].LeftMargin
+                int inlmargin = Convert.ToInt32(dt.Rows[0]["RulerLevel1LeftMargin"]);//LeftMargin
+                if(curShape.TextFrame.Ruler.Levels[1].LeftMargin!= inlmargin)
+                {
+                    sErr = sErr + "Paragraph indentation eror" + '\n';
                 }
             }
             catch (Exception err)

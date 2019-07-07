@@ -217,11 +217,14 @@
             this.ClientSize = new System.Drawing.Size(365, 287);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmChartcalc";
             this.Text = "Growth Rates";
             this.Load += new System.EventHandler(this.frmChartcalc_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmChartcalc_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmChartcalc_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

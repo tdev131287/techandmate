@@ -31,11 +31,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chk_shpname = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_Exit = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.lbl_Error = new System.Windows.Forms.Label();
             this.lblErrortype = new System.Windows.Forms.Label();
-            this.btn_Exit = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -73,6 +73,16 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // btn_Exit
+            // 
+            this.btn_Exit.Location = new System.Drawing.Point(168, 14);
+            this.btn_Exit.Name = "btn_Exit";
+            this.btn_Exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_Exit.TabIndex = 3;
+            this.btn_Exit.Text = "Exit";
+            this.btn_Exit.UseVisualStyleBackColor = true;
+            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
             // 
             // button2
             // 
@@ -114,16 +124,6 @@
             this.lblErrortype.TabIndex = 0;
             this.lblErrortype.Text = "Format Review";
             // 
-            // btn_Exit
-            // 
-            this.btn_Exit.Location = new System.Drawing.Point(168, 14);
-            this.btn_Exit.Name = "btn_Exit";
-            this.btn_Exit.Size = new System.Drawing.Size(75, 23);
-            this.btn_Exit.TabIndex = 3;
-            this.btn_Exit.Text = "Exit";
-            this.btn_Exit.UseVisualStyleBackColor = true;
-            this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
-            // 
             // frmErrorlist
             // 
             this.AcceptButton = this.button1;
@@ -133,12 +133,14 @@
             this.ClientSize = new System.Drawing.Size(353, 166);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmErrorlist";
             this.Text = "TSC PPT Error";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmErrorlist_FormClosed);
             this.Load += new System.EventHandler(this.frmErrorlist_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmErrorlist_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

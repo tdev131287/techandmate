@@ -24,6 +24,7 @@ namespace TSCPPT_Addin
                 actPPT = ppApp.Presentations.Open(PPTAttribute.standardppt, MsoTriState.msoFalse);
                 actPPT.Slides[CslideIndex].Copy();
                 CurrentPPT.Slides.Paste(PslideIndex);
+                //CurrentPPT.Slides.Paste(1);
                 if (slideType == "CSlide") { CurrentPPT.Slides[PslideIndex].Name = "Title Slide" + cnt + 1; }
                 else if (slideType == "ESlide") { CurrentPPT.Slides[PslideIndex].Name = "End Page" + cnt + 1; }
                 actPPT.Close();
@@ -83,7 +84,7 @@ namespace TSCPPT_Addin
             DataTable dt = new DataTable();
             //string ExSpacificationPath = @"C:\Users\Devendra.Tripathi\Documents\visual studio 2015\Projects\TSCPPT_Addin\TSCPPT_Addin\AppData\Mapping\PPT_Specification.xlsx";
             string cnText = @"Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";Data Source=" + PPTAttribute.dbPath;
-            string qText = "select * from [Slide$A1:B11] where SlideName='" + cri + "'";
+            string qText = "select * from [Slide$A1:B50] where SlideName='" + cri + "'";
             try
             {
                 OleDbDataAdapter da = new OleDbDataAdapter(qText, cnText);
@@ -102,7 +103,7 @@ namespace TSCPPT_Addin
             DataTable dt = new DataTable();
             //string ExSpacificationPath = @"C:\Users\Devendra.Tripathi\Documents\visual studio 2015\Projects\TSCPPT_Addin\TSCPPT_Addin\AppData\Mapping\PPT_Specification.xlsx";
             string cnText = @"Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";Data Source=" + PPTAttribute.dbPath;
-            string qText = "select * from [Chart$A1:C11] where ChartType='" + cri + "'";
+            string qText = "select * from [Chart$A1:C50] where ChartType='" + cri + "'";
             try
             {
                 OleDbDataAdapter da = new OleDbDataAdapter(qText, cnText);
@@ -174,6 +175,62 @@ namespace TSCPPT_Addin
                 PPTAttribute.ErrorLog(errtext, "InsertPlaceholder");
             }
             return (shpName);
+        }
+
+        public int Slidemapindex(string country)
+        {
+            DataTable dt = new DataTable();
+            int sldIndex=0;
+            //string ExSpacificationPath = @"C:\Users\Devendra.Tripathi\Documents\visual studio 2015\Projects\TSCPPT_Addin\TSCPPT_Addin\AppData\Mapping\PPT_Specification.xlsx";
+            string cnText = @"Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";Data Source=" + PPTAttribute.dbPath;
+            string qText = "select * from [Countrymaps$A1:C500] where CountryName='" + country + "'";
+            try
+            {
+                OleDbDataAdapter da = new OleDbDataAdapter(qText, cnText);
+                da.Fill(dt);
+                sldIndex = Convert.ToInt32(dt.Rows[0]["SlideIndex"]);
+
+            }
+            catch (Exception err)
+            {
+                string errtext = err.Message;
+                PPTAttribute.ErrorLog(errtext, "get_ChartSpacification");
+            }
+            return (sldIndex);
+        }
+
+        public DataTable iconlist(string searchstring,string type)
+        {
+            DataTable dt = new DataTable();
+            string cnText = null;
+            string qText = null;
+            cnText = @"Provider=Microsoft.ACE.OLEDB.12.0;Extended Properties=""Excel 12.0 Xml;HDR=YES;IMEX=1"";Data Source=" + PPTAttribute.Iconmapping;
+            if (type == "Icon")
+            {
+                qText = "select * from [IConmapping$A1:B5000] where Tag_Name like'%" + searchstring + "%'";
+            }
+            else if(type=="flag")
+            {
+                qText = "select * from [flags$A1:B5000] where Tag_Name like'%" + searchstring + "%'";
+            }
+            else if(type=="map")
+            {
+                //map
+                qText = "select * from [map$A1:D5000] where CountryName like'%" + searchstring + "%'";
+            }
+            try
+            {
+                OleDbDataAdapter da = new OleDbDataAdapter(qText, cnText);
+                da.Fill(dt);
+                
+
+            }
+            catch (Exception err)
+            {
+                string errtext = err.Message;
+                PPTAttribute.ErrorLog(errtext, "get_ChartSpacification");
+            }
+            return dt;
         }
     }
 }

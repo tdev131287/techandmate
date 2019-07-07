@@ -142,6 +142,8 @@
             this.ClientSize = new System.Drawing.Size(382, 165);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lbltype);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmReplacewith";
             this.Text = "Replace With";
             this.Load += new System.EventHandler(this.frmReplacewith_Load);

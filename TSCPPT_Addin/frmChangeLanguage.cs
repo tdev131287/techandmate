@@ -80,7 +80,12 @@ namespace TSCPPT_Addin
                 }
                 ActivePPT.Slides[sld].NotesPage.Shapes.Placeholders[2].TextFrame.TextRange.LanguageID = langID;
             }
-            MessageBox.Show("Language has been changed to " + lang + " in active presentation.");
+            MessageBox.Show("Language has been changed to " + lang + " in active presentation.", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

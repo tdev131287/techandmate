@@ -64,6 +64,7 @@
             this.btn_Cancel.TabIndex = 3;
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // btn_setlanguage
             // 
@@ -82,10 +83,11 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(272, 13);
             this.label5.TabIndex = 2;
-            this.label5.Text = "Copyright 2016 © The Smart Cube. All Rights Reserved.";
+            this.label5.Text = "Copyright 2018 © The Smart Cube. All Rights Reserved.";
             // 
             // cmb_lng
             // 
+            this.cmb_lng.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_lng.FormattingEnabled = true;
             this.cmb_lng.Location = new System.Drawing.Point(220, 51);
             this.cmb_lng.Name = "cmb_lng";
@@ -138,7 +140,7 @@
             this.MinimizeBox = false;
             this.Name = "frmChangeLanguage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmChangeLanguage";
+            this.Text = "Change Language";
             this.Load += new System.EventHandler(this.frmChangeLanguage_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -76,17 +76,28 @@ namespace TSCPPT_Addin
                         else if (rb_ReviewCorrect.Checked == true)
                         {
                             formatObj.CheckFormat(sldNum, "method2");
-                            if (PPTAttribute.exitFlag == false)
-                            {
-                                MessageBox.Show("Format review and correction has been done", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
+                            
                         }
-                        else if (rb_CorrectAll.Checked == true) { shpobj.CorrectFormat(sldNum); }
+                        else if (rb_CorrectAll.Checked == true) {
+                            shpobj.CorrectFormat(sldNum);
+                            
+                        }
                     }
+                    if (PPTAttribute.exitFlag == false)
+                    {
+                        MessageBox.Show("Format review and correction has been done", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                 }
                 // - After review select a first slide 
+                if (rb_CorrectAll.Checked == true)
+                {
+                    MessageBox.Show("Format review and correction has been done", PPTAttribute.msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 this.Close();               // Close the user forms 
-                if (whichSlides == "All") { ActivePPT.Slides[1].Select(); }
+                if (whichSlides == "All") {
+                    ActivePPT.Slides[1].Select();
+                }
                 
             }
             catch(Exception err)
@@ -106,6 +117,14 @@ namespace TSCPPT_Addin
         private void frmReviewformat_FormClosed(object sender, FormClosedEventArgs e)
         {
             PPTAttribute.exitFlag = false;
+        }
+
+        private void frmReviewformat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }
